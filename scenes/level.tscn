@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://dgimmwg1i8gb0"]
+
+[ext_resource type="Texture2D" uid="uid://cr1blvmtha7fn" path="res://assets/crocAvatarTransparent.png" id="1_1fc3l"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_n4ikc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_1fc3l")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_l7uv5"]
+radius = 20.0
+height = 80.0
+
+[node name="Level" type="Node2D"]
+
+[node name="Witch" type="CharacterBody2D" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Witch"]
+sprite_frames = SubResource("SpriteFrames_n4ikc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Witch"]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_l7uv5")
