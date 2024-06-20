@@ -47,7 +47,10 @@ public partial class witch : CharacterBody2D
 			GD.Print("Boom!");
 			shooting = true;
 			_timer.Start();
-			
+			var scene = GD.Load<PackedScene>("res://scenes/magic_bullet.tscn");
+			var inst = scene.Instantiate<Area2D>();
+			inst.GlobalPosition = GlobalPosition;
+			AddSibling(inst);
 		}
 	}
 
