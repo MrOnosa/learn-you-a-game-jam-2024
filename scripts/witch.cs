@@ -15,8 +15,11 @@ public partial class witch : CharacterBody2D
 
     public override void _Process(double delta)
     {
+        var twin = Input.GetVector("TwinStickShootLeft", "TwinStickShootRight", "TwinStickShootUp", "TwinStickShootDown"); 
         if (Input.IsActionPressed("Shoot"))
             Shoot();
+        else if (twin != Vector2.Zero)
+            TwinStickShoot();
     }
 
     public override void _PhysicsProcess(double delta)
@@ -54,6 +57,27 @@ public partial class witch : CharacterBody2D
             
             Vector2 mousePos = GetViewport().GetMousePosition(); // Get the position of the mouse 
             Vector2 direction = (mousePos - inst.GlobalPosition).Normalized(); // Calculate the direction to the mouse from the bullet 
+
+            Vector2 velocity = direction * magic_bullet.Speed;
+    
+            inst.Velocity = velocity;
+            
+            AddSibling(inst);
+        }
+    }
+
+    public void TwinStickShoot()
+    {
+        if (shooting == false)
+        {
+            GD.Print("Twin Stick Boom!");
+            shooting = true;
+            _timer.Start();
+            var scene = GD.Load<PackedScene>("res://scenes/magic_bullet.tscn");
+            var inst = scene.Instantiate<magic_bullet>();
+            inst.GlobalPosition = GlobalPosition;
+
+            Vector2 direction = Input.GetVector("TwinStickShootLeft", "TwinStickShootRight", "TwinStickShootUp", "TwinStickShootDown").Normalized(); 
 
             Vector2 velocity = direction * magic_bullet.Speed;
     
