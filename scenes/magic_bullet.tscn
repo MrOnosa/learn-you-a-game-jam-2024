@@ -1,5 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://wqd2eildcrmk"]
+[gd_scene load_steps=5 format=3 uid="uid://wqd2eildcrmk"]
 
+[ext_resource type="Script" path="res://scripts/magic_bullet.cs" id="1_j45bt"]
 [ext_resource type="Texture2D" uid="uid://duo1qnhy3y165" path="res://assets/bullet.png" id="1_ly0sv"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ftvhu"]
@@ -17,6 +18,7 @@ animations = [{
 radius = 16.0
 
 [node name="MagicBullet" type="Area2D"]
+script = ExtResource("1_j45bt")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_ftvhu")
