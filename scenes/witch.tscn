@@ -1,8 +1,13 @@
-[gd_scene load_steps=6 format=3 uid="uid://d3vw40ce38beq"]
+[gd_scene load_steps=8 format=3 uid="uid://d3vw40ce38beq"]
 
 [ext_resource type="Script" path="res://scripts/witch.cs" id="1_uilfk"]
 [ext_resource type="Texture2D" uid="uid://bsc45k30267sk" path="res://assets/characters/player_placeholdert.png" id="2_iqnx7"]
+[ext_resource type="Shader" path="res://scenes/witch.gdshader" id="2_j17f8"]
 [ext_resource type="PackedScene" uid="uid://pkfb6tq1qoo4" path="res://scenes/health_component.tscn" id="3_ghxkk"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_s5etq"]
+shader = ExtResource("2_j17f8")
+shader_parameter/invincible = false
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_n4ikc"]
 animations = [{
@@ -23,6 +28,7 @@ height = 32.0
 script = ExtResource("1_uilfk")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_s5etq")
 sprite_frames = SubResource("SpriteFrames_n4ikc")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

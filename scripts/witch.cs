@@ -19,6 +19,7 @@ public partial class witch : CharacterBody2D
 		_invincibilityTimer = GetNode<Timer>("InvincibilityTimer");
 		_camera = GetNode<Camera2D>("Camera2D");
 		_healthComponent = GetNode<health_component>("HealthComponent");
+		_toggle_invincible_shader(false);
 	}
 
 	public override void _Process(double delta)
@@ -125,6 +126,7 @@ public partial class witch : CharacterBody2D
 				_invincibilityTimer.Start();
 				_healthComponent.Damage(1);
 				Invincible = true;
+				_toggle_invincible_shader(true);
 			}
 		}
 	}
@@ -132,5 +134,12 @@ public partial class witch : CharacterBody2D
 	private void _on_invincibility_timer_timeout()
 	{
 		Invincible = false;
+		_toggle_invincible_shader(false);
+	}
+
+	private void _toggle_invincible_shader(bool active)
+	{
+		var sprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
+		(sprite.Material as ShaderMaterial)?.SetShaderParameter("invincible", active);
 	}
 }
