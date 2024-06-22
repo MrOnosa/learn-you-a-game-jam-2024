@@ -5,14 +5,20 @@ public partial class witch : CharacterBody2D
 {
 	public const float Speed = 100.0f;
 	public bool shooting = false;
+	public bool Invincible = false;
 
 	private Timer _timer;
+	private Timer _invincibilityTimer;
 	private Camera2D _camera;
+	private health_component _healthComponent;
+	
 
 	public override void _Ready()
 	{
 		_timer = GetNode<Timer>("ShootCooldownTimer");
+		_invincibilityTimer = GetNode<Timer>("InvincibilityTimer");
 		_camera = GetNode<Camera2D>("Camera2D");
+		_healthComponent = GetNode<health_component>("HealthComponent");
 	}
 
 	public override void _Process(double delta)
@@ -98,5 +104,33 @@ public partial class witch : CharacterBody2D
 	private void _on_quit_button_pressed()
 	{
 		GetTree().Quit();
+	}
+
+	private void _on_health_component_health_changed(HealthUpdate update)
+	{
+		GD.Print($"HP: {update.CurrentHealth}");
+	}
+
+	private void _on_health_component_died()
+	{
+		GetTree().ChangeSceneToFile("res://scenes/title.tscn");
+	}
+
+	private void _on_hit_box_area_2d_area_entered(Area2D area)
+	{
+		if (!Invincible)
+		{
+			if (area is green_goblin goblin)
+			{
+				_invincibilityTimer.Start();
+				_healthComponent.Damage(1);
+				Invincible = true;
+			}
+		}
+	}
+
+	private void _on_invincibility_timer_timeout()
+	{
+		Invincible = false;
 	}
 }

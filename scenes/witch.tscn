@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://d3vw40ce38beq"]
+[gd_scene load_steps=6 format=3 uid="uid://d3vw40ce38beq"]
 
 [ext_resource type="Script" path="res://scripts/witch.cs" id="1_uilfk"]
 [ext_resource type="Texture2D" uid="uid://bsc45k30267sk" path="res://assets/characters/player_placeholdert.png" id="2_iqnx7"]
+[ext_resource type="PackedScene" uid="uid://pkfb6tq1qoo4" path="res://scenes/health_component.tscn" id="3_ghxkk"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_n4ikc"]
 animations = [{
@@ -15,8 +16,8 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_l7uv5"]
-radius = 20.0
-height = 80.0
+radius = 9.0
+height = 32.0
 
 [node name="Witch" type="CharacterBody2D"]
 script = ExtResource("1_uilfk")
@@ -25,7 +26,8 @@ script = ExtResource("1_uilfk")
 sprite_frames = SubResource("SpriteFrames_n4ikc")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-rotation = 1.5708
+visible = false
+position = Vector2(0, 8)
 shape = SubResource("CapsuleShape2D_l7uv5")
 
 [node name="ShootCooldownTimer" type="Timer" parent="."]
@@ -37,4 +39,18 @@ drag_vertical_enabled = true
 drag_horizontal_offset = 1.0
 drag_vertical_offset = 1.0
 
+[node name="HealthComponent" parent="." instance=ExtResource("3_ghxkk")]
+
+[node name="HitBoxArea2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxArea2D"]
+position = Vector2(0, 8)
+shape = SubResource("CapsuleShape2D_l7uv5")
+
+[node name="InvincibilityTimer" type="Timer" parent="."]
+
 [connection signal="timeout" from="ShootCooldownTimer" to="." method="_on_shoot_cooldown_timer_timeout"]
+[connection signal="Died" from="HealthComponent" to="." method="_on_health_component_died"]
+[connection signal="HealthChanged" from="HealthComponent" to="." method="_on_health_component_health_changed"]
+[connection signal="area_entered" from="HitBoxArea2D" to="." method="_on_hit_box_area_2d_area_entered"]
+[connection signal="timeout" from="InvincibilityTimer" to="." method="_on_invincibility_timer_timeout"]
