@@ -6,3 +6,10 @@
 
 [node name="Witch" parent="." instance=ExtResource("1_f848o")]
 position = Vector2(553, 346)
+
+[node name="QuitButton" type="Button" parent="."]
+offset_right = 42.0
+offset_bottom = 31.0
+text = "Quit"
+
+[connection signal="pressed" from="QuitButton" to="Witch" method="_on_quit_button_pressed"]
