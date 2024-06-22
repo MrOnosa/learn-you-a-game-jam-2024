@@ -25,5 +25,3 @@ public partial class title : Control
 	}
 	
 }
-
-

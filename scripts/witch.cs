@@ -22,7 +22,7 @@ public partial class witch : CharacterBody2D
 			TwinStickShoot();
 	}
 
-<<<<<<< Updated upstream
+
 	public override void _PhysicsProcess(double delta)
 	{
 		Vector2 velocity = Velocity;
@@ -92,19 +92,9 @@ public partial class witch : CharacterBody2D
 	{
 		shooting = false;
 	}
-}
-=======
-	private void _on_shoot_cooldown_timer_timeout()
-	{
-		shooting = false;
-	}
 	
 	private void _on_quit_button_pressed()
 	{
 		GetTree().Quit();
 	}
 }
-
-
-
->>>>>>> Stashed changes
