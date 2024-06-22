@@ -3,14 +3,16 @@ using System;
 
 public partial class witch : CharacterBody2D
 {
-	public const float Speed = 300.0f;
+	public const float Speed = 100.0f;
 	public bool shooting = false;
 
 	private Timer _timer;
+	private Camera2D _camera;
 
 	public override void _Ready()
 	{
 		_timer = GetNode<Timer>("ShootCooldownTimer");
+		_camera = GetNode<Camera2D>("Camera2D");
 	}
 
 	public override void _Process(double delta)
@@ -21,7 +23,6 @@ public partial class witch : CharacterBody2D
 		else if (twin != Vector2.Zero)
 			TwinStickShoot();
 	}
-
 
 	public override void _PhysicsProcess(double delta)
 	{
@@ -54,9 +55,10 @@ public partial class witch : CharacterBody2D
 			var scene = GD.Load<PackedScene>("res://scenes/magic_bullet.tscn");
 			var inst = scene.Instantiate<magic_bullet>();
 			inst.GlobalPosition = GlobalPosition;
+
+
+			Vector2 mousePos = _camera.GetGlobalMousePosition(); 
 			
-			
-			Vector2 mousePos = GetViewport().GetMousePosition(); // Get the position of the mouse 
 			Vector2 direction = (mousePos - inst.GlobalPosition).Normalized(); // Calculate the direction to the mouse from the bullet 
 
 			Vector2 velocity = direction * magic_bullet.Speed;

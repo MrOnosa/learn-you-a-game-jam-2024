@@ -1,15 +1,36 @@
-[gd_scene load_steps=2 format=3 uid="uid://dgimmwg1i8gb0"]
+[gd_scene load_steps=3 format=3 uid="uid://dgimmwg1i8gb0"]
 
 [ext_resource type="PackedScene" uid="uid://d3vw40ce38beq" path="res://scenes/witch.tscn" id="1_f848o"]
+[ext_resource type="PackedScene" uid="uid://dinajqbfko0y" path="res://scenes/green_goblin.tscn" id="2_r0ujc"]
 
 [node name="Level" type="Node2D"]
 
 [node name="Witch" parent="." instance=ExtResource("1_f848o")]
-position = Vector2(553, 346)
+position = Vector2(317, 183)
 
-[node name="QuitButton" type="Button" parent="."]
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="QuitButton" type="Button" parent="CanvasLayer"]
 offset_right = 42.0
 offset_bottom = 31.0
 text = "Quit"
 
-[connection signal="pressed" from="QuitButton" to="Witch" method="_on_quit_button_pressed"]
+[node name="greenGoblin" parent="." instance=ExtResource("2_r0ujc")]
+position = Vector2(448, 73)
+
+[node name="greenGoblin2" parent="." instance=ExtResource("2_r0ujc")]
+position = Vector2(21, 265)
+
+[node name="greenGoblin3" parent="." instance=ExtResource("2_r0ujc")]
+position = Vector2(672, 336)
+
+[node name="greenGoblin4" parent="." instance=ExtResource("2_r0ujc")]
+position = Vector2(-192, 539)
+
+[node name="greenGoblin5" parent="." instance=ExtResource("2_r0ujc")]
+position = Vector2(-40, -101)
+
+[node name="greenGoblin6" parent="." instance=ExtResource("2_r0ujc")]
+position = Vector2(426, 477)
+
+[connection signal="pressed" from="CanvasLayer/QuitButton" to="Witch" method="_on_quit_button_pressed"]

@@ -1,6 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://beitbktuljj8o"]
+[gd_scene load_steps=3 format=3 uid="uid://beitbktuljj8o"]
 
 [ext_resource type="Script" path="res://scripts/gm.cs" id="1_ffesr"]
+[ext_resource type="AudioStream" uid="uid://b16iakeh8lric" path="res://assets/Game_Jam_Main_Song.mp3" id="2_ir5lg"]
 
 [node name="GM" type="Node"]
 script = ExtResource("1_ffesr")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_ir5lg")
