@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://beitbktuljj8o"]
+
+[ext_resource type="Script" path="res://scripts/gm.cs" id="1_ffesr"]
+
+[node name="GM" type="Node"]
+script = ExtResource("1_ffesr")
