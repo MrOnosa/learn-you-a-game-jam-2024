@@ -22,4 +22,10 @@ public partial class magic_bullet : Area2D
 	{
 		Translate(Velocity);
 	}
+
+	private void _on_visible_on_screen_notifier_2d_screen_exited()
+	{
+		GD.Print("Bullet is off screen");
+		QueueFree();
+	}
 }

@@ -33,4 +33,7 @@ position = Vector2(-40, -101)
 [node name="greenGoblin6" parent="." instance=ExtResource("2_r0ujc")]
 position = Vector2(426, 477)
 
+[node name="greenGoblin7" parent="." instance=ExtResource("2_r0ujc")]
+position = Vector2(495, 47)
+
 [connection signal="pressed" from="CanvasLayer/QuitButton" to="Witch" method="_on_quit_button_pressed"]

@@ -29,6 +29,7 @@ rotation = 1.5708
 shape = SubResource("CapsuleShape2D_l7uv5")
 
 [node name="ShootCooldownTimer" type="Timer" parent="."]
+wait_time = 0.1
 
 [node name="Camera2D" type="Camera2D" parent="."]
 drag_horizontal_enabled = true
