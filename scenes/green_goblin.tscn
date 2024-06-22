@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://dinajqbfko0y"]
+[gd_scene load_steps=6 format=3 uid="uid://dinajqbfko0y"]
 
 [ext_resource type="Texture2D" uid="uid://bj03m4yh64d43" path="res://assets/characters/enemyG_placeholder.png" id="1_tf3ux"]
 [ext_resource type="Script" path="res://scripts/green_goblin.cs" id="1_v5pvm"]
+[ext_resource type="PackedScene" uid="uid://pkfb6tq1qoo4" path="res://scenes/health_component.tscn" id="3_q4q4w"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_o0fwx"]
 animations = [{
@@ -27,4 +28,8 @@ sprite_frames = SubResource("SpriteFrames_o0fwx")
 position = Vector2(0, 10)
 shape = SubResource("CapsuleShape2D_m1pke")
 
+[node name="HealthComponent" parent="." instance=ExtResource("3_q4q4w")]
+MaxHealth = 5
+
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="Died" from="HealthComponent" to="." method="_on_health_component_died"]
