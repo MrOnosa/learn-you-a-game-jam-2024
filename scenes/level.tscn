@@ -1,9 +1,12 @@
-[gd_scene load_steps=3 format=3 uid="uid://dgimmwg1i8gb0"]
+[gd_scene load_steps=5 format=3 uid="uid://dgimmwg1i8gb0"]
 
+[ext_resource type="Script" path="res://scripts/level.cs" id="1_a0w5b"]
 [ext_resource type="PackedScene" uid="uid://d3vw40ce38beq" path="res://scenes/witch.tscn" id="1_f848o"]
 [ext_resource type="PackedScene" uid="uid://dinajqbfko0y" path="res://scenes/green_goblin.tscn" id="2_r0ujc"]
+[ext_resource type="PackedScene" uid="uid://byyw4cuk8c0vm" path="res://scenes/pink_goblin.tscn" id="3_2gt1r"]
 
 [node name="Level" type="Node2D"]
+script = ExtResource("1_a0w5b")
 
 [node name="Witch" parent="." instance=ExtResource("1_f848o")]
 position = Vector2(317, 183)
@@ -35,5 +38,28 @@ position = Vector2(426, 477)
 
 [node name="greenGoblin7" parent="." instance=ExtResource("2_r0ujc")]
 position = Vector2(495, 47)
+
+[node name="greenGoblin8" parent="." instance=ExtResource("2_r0ujc")]
+position = Vector2(449, 173)
+
+[node name="pinkGoblin" parent="." instance=ExtResource("3_2gt1r")]
+position = Vector2(449, 228)
+Speed = 0.5
+
+[node name="pinkGoblin2" parent="." instance=ExtResource("3_2gt1r")]
+position = Vector2(281, 277)
+Speed = 0.5
+
+[node name="pinkGoblin3" parent="." instance=ExtResource("3_2gt1r")]
+position = Vector2(117, 4)
+Speed = 0.5
+
+[node name="pinkGoblin4" parent="." instance=ExtResource("3_2gt1r")]
+position = Vector2(252, 431)
+Speed = 0.5
+
+[node name="pinkGoblin5" parent="." instance=ExtResource("3_2gt1r")]
+position = Vector2(487, 228)
+Speed = 0.5
 
 [connection signal="pressed" from="CanvasLayer/QuitButton" to="Witch" method="_on_quit_button_pressed"]

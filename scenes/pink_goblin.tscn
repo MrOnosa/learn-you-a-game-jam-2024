@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3 uid="uid://byyw4cuk8c0vm"]
+
+[ext_resource type="Script" path="res://scripts/green_goblin.cs" id="1_35ynn"]
+[ext_resource type="Texture2D" uid="uid://dvhn0uqbcnaj6" path="res://assets/characters/enemyP_placeholder.png" id="2_fcco1"]
+[ext_resource type="PackedScene" uid="uid://pkfb6tq1qoo4" path="res://scenes/health_component.tscn" id="3_wmmdj"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_o0fwx"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_fcco1")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_m1pke"]
+height = 40.0
+
+[node name="pinkGoblin" type="Area2D"]
+script = ExtResource("1_35ynn")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_o0fwx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 10)
+shape = SubResource("CapsuleShape2D_m1pke")
+
+[node name="HealthComponent" parent="." instance=ExtResource("3_wmmdj")]
+MaxHealth = 7
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="Died" from="HealthComponent" to="." method="_on_health_component_died"]

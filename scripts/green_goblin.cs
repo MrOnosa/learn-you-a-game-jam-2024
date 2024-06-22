@@ -3,6 +3,9 @@ using System;
 
 public partial class green_goblin : Area2D
 {
+	[Export]
+	public float Speed = 1.0f;
+	
 	private health_component _healthComponent;
 	
 	// Called when the node enters the scene tree for the first time.
@@ -14,6 +17,14 @@ public partial class green_goblin : Area2D
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
+	}
+
+	//A physics process update to move towards the player
+	public void MoveTowardsPlayer(Vector2 witchPosition, double delta)
+	{
+		Vector2 direction = (witchPosition - Position).Normalized(); // Calculate the direction to the player from the goblin 
+		Vector2 velocity = direction * Speed;
+		Translate(velocity);
 	}
 	
 	private void _on_area_entered(Area2D area)
