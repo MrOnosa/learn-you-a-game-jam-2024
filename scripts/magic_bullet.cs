@@ -7,6 +7,11 @@ public partial class magic_bullet : Area2D
 	
 	[Export] 
 	public Vector2 Velocity { get; set; } = Vector2.Zero;
+
+	/// <summary>
+	/// True when this spawned from the witch 
+	/// </summary>
+	[Export] public bool FriendlyFire;
 	
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -23,9 +28,9 @@ public partial class magic_bullet : Area2D
 		Translate(Velocity);
 	}
 
-	private void _on_visible_on_screen_notifier_2d_screen_exited()
+	private void _on_lifespan_timer_timeout()
 	{
-		GD.Print("Bullet is off screen");
+		GD.Print("Bullet is too old");
 		QueueFree();
 	}
 }

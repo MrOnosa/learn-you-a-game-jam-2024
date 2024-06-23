@@ -1,13 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://wqd2eildcrmk"]
+[gd_scene load_steps=5 format=3 uid="uid://c0hr4r3osblyx"]
 
-[ext_resource type="Script" path="res://scripts/magic_bullet.cs" id="1_j45bt"]
-[ext_resource type="Texture2D" uid="uid://duo1qnhy3y165" path="res://assets/bullet.png" id="1_ly0sv"]
+[ext_resource type="Script" path="res://scripts/magic_bullet.cs" id="1_f87gs"]
+[ext_resource type="Texture2D" uid="uid://bwfyacgfvakjg" path="res://assets/bullet2.png" id="2_0fg8j"]
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_ftvhu"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_c5wrp"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_ly0sv")
+"texture": ExtResource("2_0fg8j")
 }],
 "loop": true,
 "name": &"default",
@@ -15,14 +15,14 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_kc5hq"]
-radius = 16.0
+radius = 4.0
 
 [node name="MagicBullet" type="Area2D"]
 scale = Vector2(0.25, 0.25)
-script = ExtResource("1_j45bt")
+script = ExtResource("1_f87gs")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-sprite_frames = SubResource("SpriteFrames_ftvhu")
+sprite_frames = SubResource("SpriteFrames_c5wrp")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_kc5hq")

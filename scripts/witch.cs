@@ -61,6 +61,7 @@ public partial class witch : CharacterBody2D
 			_timer.Start();
 			var scene = GD.Load<PackedScene>("res://scenes/magic_bullet.tscn");
 			var inst = scene.Instantiate<magic_bullet>();
+			inst.FriendlyFire = true;
 			inst.GlobalPosition = GlobalPosition;
 
 
@@ -123,13 +124,26 @@ public partial class witch : CharacterBody2D
 		{
 			if (area is green_goblin goblin)
 			{
-				_invincibilityTimer.Start();
-				_healthComponent.Damage(1);
-				Invincible = true;
-				_toggle_invincible_shader(true);
+				TakeDamageRoutine(2);
+			}
+			else if (area is magic_bullet bullet)
+			{
+				if (!bullet.FriendlyFire)
+				{
+					TakeDamageRoutine(1);
+				}
 			}
 		}
 	}
+
+	private void TakeDamageRoutine(int damage)
+	{
+		_invincibilityTimer.Start();
+		_healthComponent.Damage(damage);
+		Invincible = true;
+		_toggle_invincible_shader(true);
+	}
+
 
 	private void _on_invincibility_timer_timeout()
 	{

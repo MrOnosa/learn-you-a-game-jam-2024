@@ -1,15 +1,30 @@
-[gd_scene load_steps=5 format=3 uid="uid://dgimmwg1i8gb0"]
+[gd_scene load_steps=6 format=3 uid="uid://dgimmwg1i8gb0"]
 
 [ext_resource type="Script" path="res://scripts/level.cs" id="1_a0w5b"]
 [ext_resource type="PackedScene" uid="uid://d3vw40ce38beq" path="res://scenes/witch.tscn" id="1_f848o"]
 [ext_resource type="PackedScene" uid="uid://dinajqbfko0y" path="res://scenes/green_goblin.tscn" id="2_r0ujc"]
 [ext_resource type="PackedScene" uid="uid://byyw4cuk8c0vm" path="res://scenes/pink_goblin.tscn" id="3_2gt1r"]
 
+[sub_resource type="Curve2D" id="Curve2D_6ldnn"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -80, -80, 0, 0, 0, 0, 288, -144, 0, 0, 0, 0, 720, -64, 0, 0, 0, 0, 760, 192, 0, 0, 0, 0, 704, 448, 0, 0, 0, 0, 320, 512, 0, 0, 0, 0, -64, 448, 0, 0, 0, 0, -128, 192, 0, 0, 0, 0, -80, -80)
+}
+point_count = 9
+
 [node name="Level" type="Node2D"]
 script = ExtResource("1_a0w5b")
+MobScene = ExtResource("2_r0ujc")
 
 [node name="Witch" parent="." instance=ExtResource("1_f848o")]
 position = Vector2(317, 183)
+
+[node name="MobPath2D" type="Path2D" parent="Witch"]
+position = Vector2(-317, -183)
+curve = SubResource("Curve2D_6ldnn")
+
+[node name="MobSpawnLocation" type="PathFollow2D" parent="Witch/MobPath2D"]
+position = Vector2(-80, -80)
+rotation = -0.172191
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -17,30 +32,6 @@ position = Vector2(317, 183)
 offset_right = 42.0
 offset_bottom = 31.0
 text = "Quit"
-
-[node name="greenGoblin" parent="." instance=ExtResource("2_r0ujc")]
-position = Vector2(448, 73)
-
-[node name="greenGoblin2" parent="." instance=ExtResource("2_r0ujc")]
-position = Vector2(21, 265)
-
-[node name="greenGoblin3" parent="." instance=ExtResource("2_r0ujc")]
-position = Vector2(672, 336)
-
-[node name="greenGoblin4" parent="." instance=ExtResource("2_r0ujc")]
-position = Vector2(-192, 539)
-
-[node name="greenGoblin5" parent="." instance=ExtResource("2_r0ujc")]
-position = Vector2(-40, -101)
-
-[node name="greenGoblin6" parent="." instance=ExtResource("2_r0ujc")]
-position = Vector2(426, 477)
-
-[node name="greenGoblin7" parent="." instance=ExtResource("2_r0ujc")]
-position = Vector2(495, 47)
-
-[node name="greenGoblin8" parent="." instance=ExtResource("2_r0ujc")]
-position = Vector2(449, 173)
 
 [node name="pinkGoblin" parent="." instance=ExtResource("3_2gt1r")]
 position = Vector2(449, 228)
@@ -62,4 +53,8 @@ Speed = 0.5
 position = Vector2(487, 228)
 Speed = 0.5
 
+[node name="MobSpawnTimer" type="Timer" parent="."]
+autostart = true
+
 [connection signal="pressed" from="CanvasLayer/QuitButton" to="Witch" method="_on_quit_button_pressed"]
+[connection signal="timeout" from="MobSpawnTimer" to="." method="_on_mob_spawn_timer_timeout"]

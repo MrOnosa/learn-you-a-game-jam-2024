@@ -1,17 +1,34 @@
 using Godot;
-using System;
 
 public partial class green_goblin : Area2D
 {
 	[Export]
 	public float Speed = 1.0f;
+
+	[Export] public float BulletFireWaitTime = 1.0f;
+	[Export] public float BulletFireVariance = 0.5f;
+
 	
 	private health_component _healthComponent;
+	private Timer _shootBulletTimer;
 	
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
 		_healthComponent = GetNode<health_component>("HealthComponent");
+		_shootBulletTimer = GetNode<Timer>("ShootBulletTimer");
+
+		SetShootBulletTimerWaitTimeToARandomRange();
+
+	}
+
+	private void SetShootBulletTimerWaitTimeToARandomRange()
+	{
+		if (_shootBulletTimer != null)
+		{
+			_shootBulletTimer.WaitTime = GD.RandRange(BulletFireWaitTime * BulletFireVariance,
+				BulletFireWaitTime + (BulletFireWaitTime * BulletFireVariance));
+		}
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -29,13 +46,16 @@ public partial class green_goblin : Area2D
 	
 	private void _on_area_entered(Area2D area)
 	{
-		if (area is magic_bullet)
+		if (area is magic_bullet bullet)
 		{
-			GD.Print("Bullet hit green goblin");
-			area.QueueFree();
-			
-			// Handle damage
-			_healthComponent.Damage(1);
+			if (bullet.FriendlyFire)
+			{
+				GD.Print("Bullet hit green goblin");
+				area.QueueFree();
+
+				// Handle damage
+				_healthComponent.Damage(1);
+			}
 		}
 	}
 
@@ -43,5 +63,27 @@ public partial class green_goblin : Area2D
 	{
 		//TODO: Death animation or something
 		QueueFree();
+	}
+
+	private void _on_shoot_bullet_timer_timeout()
+	{
+		SetShootBulletTimerWaitTimeToARandomRange();
+		var scene = GD.Load<PackedScene>("res://scenes/bullet2.tscn");
+		var bulletSpawnPoint = GetNode<Marker2D>("BulletSpawnMarker2D");
+		var inst = scene.Instantiate<magic_bullet>();
+		inst.FriendlyFire = false;
+		inst.GlobalPosition = bulletSpawnPoint?.GlobalPosition ?? GlobalPosition;
+		
+		var level = GetParent<Node2D>();
+		var witch = (CharacterBody2D)level.FindChild("Witch");
+		Vector2 mousePos = witch.GlobalPosition;
+				
+		Vector2 direction = (mousePos - inst.GlobalPosition).Normalized(); // Calculate the direction to the mouse from the bullet 
+
+		Vector2 velocity = direction * magic_bullet.Speed;
+		
+		inst.Velocity = velocity;
+				
+		AddSibling(inst);
 	}
 }
