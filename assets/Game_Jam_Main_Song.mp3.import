@@ -12,8 +12,8 @@ dest_files=["res://.godot/imported/Game_Jam_Main_Song.mp3-c59b4f9f2df61b34d7df31
 
 [params]
 
-loop=false
-loop_offset=0
-bpm=0
+loop=true
+loop_offset=0.0
+bpm=0.0
 beat_count=0
 bar_beats=4
