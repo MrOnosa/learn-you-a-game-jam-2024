@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://dgimmwg1i8gb0"]
+[gd_scene load_steps=7 format=3 uid="uid://dgimmwg1i8gb0"]
 
 [ext_resource type="Script" path="res://scripts/level.cs" id="1_a0w5b"]
 [ext_resource type="PackedScene" uid="uid://d3vw40ce38beq" path="res://scenes/witch.tscn" id="1_f848o"]
 [ext_resource type="PackedScene" uid="uid://dinajqbfko0y" path="res://scenes/green_goblin.tscn" id="2_r0ujc"]
 [ext_resource type="PackedScene" uid="uid://byyw4cuk8c0vm" path="res://scenes/pink_goblin.tscn" id="3_2gt1r"]
+[ext_resource type="Texture2D" uid="uid://b1i7bf2xt13cf" path="res://assets/simpleBackgroundTile.png" id="5_d6d32"]
 
 [sub_resource type="Curve2D" id="Curve2D_6ldnn"]
 _data = {
@@ -55,6 +56,18 @@ Speed = 0.5
 
 [node name="MobSpawnTimer" type="Timer" parent="."]
 autostart = true
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_mirroring = Vector2(640, 640)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+texture_repeat = 2
+texture = ExtResource("5_d6d32")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 640, 640)
 
 [connection signal="pressed" from="CanvasLayer/QuitButton" to="Witch" method="_on_quit_button_pressed"]
 [connection signal="timeout" from="MobSpawnTimer" to="." method="_on_mob_spawn_timer_timeout"]
