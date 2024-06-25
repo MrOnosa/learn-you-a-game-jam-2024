@@ -9,18 +9,26 @@ public partial class green_goblin : Area2D
 	[Export] public float BulletFireVariance = 0.5f;
 	[Export] public ItemType WeakToType = ItemType.GreenStaff;
 
-	
 	private health_component _healthComponent;
 	private Timer _shootBulletTimer;
+	private Timer _hurtTimer;
 	
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
 		_healthComponent = GetNode<health_component>("HealthComponent");
 		_shootBulletTimer = GetNode<Timer>("ShootBulletTimer");
+		_hurtTimer = GetNode<Timer>("HurtTimer");
 
 		SetShootBulletTimerWaitTimeToARandomRange();
 
+		
+		var sprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
+		
+		if (sprite.Material is ShaderMaterial shader)
+		{
+		    sprite.Material = shader.Duplicate() as ShaderMaterial;
+		}
 	}
 
 	private void SetShootBulletTimerWaitTimeToARandomRange()
@@ -64,9 +72,22 @@ public partial class green_goblin : Area2D
 				{
 					// Handle damage
 					_healthComponent.Damage(1);
+					if (_hurtTimer.IsStopped())
+					{
+						var sprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
+						(sprite.Material as ShaderMaterial)?.SetShaderParameter("hurt", true);
+					}
+					_hurtTimer.Start(1);
 				}
 			}
 		}
+	}
+
+	private void _on_hurt_timer_timeout()
+	{
+		var sprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
+		(sprite.Material as ShaderMaterial)?.SetShaderParameter("hurt", false);
+		_hurtTimer.Stop();
 	}
 
 	private void _on_health_component_died()

@@ -1,8 +1,33 @@
-[gd_scene load_steps=6 format=3 uid="uid://dinajqbfko0y"]
+[gd_scene load_steps=8 format=3 uid="uid://dinajqbfko0y"]
 
 [ext_resource type="Texture2D" uid="uid://bj03m4yh64d43" path="res://assets/characters/enemyG_placeholder.png" id="1_tf3ux"]
 [ext_resource type="Script" path="res://scripts/green_goblin.cs" id="1_v5pvm"]
 [ext_resource type="PackedScene" uid="uid://pkfb6tq1qoo4" path="res://scenes/health_component.tscn" id="3_q4q4w"]
+
+[sub_resource type="Shader" id="Shader_piqjy"]
+code = "shader_type canvas_item;
+uniform bool hurt = false;
+
+void vertex() {
+	// Called for every vertex the material is visible on.
+}
+
+void fragment() {
+	if(hurt)
+	{
+		COLOR.gb = vec2(COLOR.gb * (sin(TIME * 12.0) / 5.0 + 0.5));
+	}
+}
+
+//void light() {
+	// Called for every pixel for every light affecting the CanvasItem.
+	// Uncomment to replace the default light processing function with this one.
+//}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xk6ju"]
+shader = SubResource("Shader_piqjy")
+shader_parameter/hurt = false
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_o0fwx"]
 animations = [{
@@ -22,6 +47,7 @@ height = 40.0
 script = ExtResource("1_v5pvm")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_xk6ju")
 sprite_frames = SubResource("SpriteFrames_o0fwx")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -37,6 +63,9 @@ autostart = true
 [node name="BulletSpawnMarker2D" type="Marker2D" parent="."]
 position = Vector2(-24, 4)
 
+[node name="HurtTimer" type="Timer" parent="."]
+
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="Died" from="HealthComponent" to="." method="_on_health_component_died"]
 [connection signal="timeout" from="ShootBulletTimer" to="." method="_on_shoot_bullet_timer_timeout"]
+[connection signal="timeout" from="HurtTimer" to="." method="_on_hurt_timer_timeout"]
