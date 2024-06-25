@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://534fjhjc57pk"]
+
+[ext_resource type="Script" path="res://scripts/item.cs" id="1_a74db"]
+[ext_resource type="PackedScene" uid="uid://cn320bnwu77pd" path="res://item_animated_sprite_2d.tscn" id="2_b3sq7"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_gx4ow"]
+radius = 3.53339
+height = 41.0163
+
+[node name="Item" type="Area2D"]
+script = ExtResource("1_a74db")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 0.782382
+shape = SubResource("CapsuleShape2D_gx4ow")
+
+[node name="AnimatedSprite2D" parent="." instance=ExtResource("2_b3sq7")]
+position = Vector2(0, 0)
+frame = 1

@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://cn320bnwu77pd"]
+
+[ext_resource type="Texture2D" uid="uid://bm7l8gbyovu1k" path="res://assets/EmptyItem.png" id="1_7mtn2"]
+[ext_resource type="Texture2D" uid="uid://chp3qvx3ypdxf" path="res://assets/GreenWand.png" id="2_cagkm"]
+[ext_resource type="Texture2D" uid="uid://jo3f5gtctqug" path="res://assets/PinkWand.png" id="3_wlqur"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_84kw8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_7mtn2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_cagkm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_wlqur")
+}],
+"loop": true,
+"name": &"ItemTextureFrames",
+"speed": 5.0
+}]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D"]
+position = Vector2(20, 20)
+sprite_frames = SubResource("SpriteFrames_84kw8")
+animation = &"ItemTextureFrames"

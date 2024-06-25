@@ -7,6 +7,7 @@ public partial class green_goblin : Area2D
 
 	[Export] public float BulletFireWaitTime = 1.0f;
 	[Export] public float BulletFireVariance = 0.5f;
+	[Export] public ItemType WeakToType = ItemType.GreenStaff;
 
 	
 	private health_component _healthComponent;
@@ -52,9 +53,18 @@ public partial class green_goblin : Area2D
 			{
 				GD.Print("Bullet hit green goblin");
 				area.QueueFree();
+				
+				
+				if (bullet.Velocity != null)
+				{
+				    Position += bullet.Velocity * (float)1;
+				}
 
-				// Handle damage
-				_healthComponent.Damage(1);
+				if (bullet.Type == WeakToType)
+				{
+					// Handle damage
+					_healthComponent.Damage(1);
+				}
 			}
 		}
 	}

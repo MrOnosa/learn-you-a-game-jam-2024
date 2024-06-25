@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dgimmwg1i8gb0"]
+[gd_scene load_steps=11 format=3 uid="uid://dgimmwg1i8gb0"]
 
 [ext_resource type="Script" path="res://scripts/level.cs" id="1_a0w5b"]
 [ext_resource type="PackedScene" uid="uid://d3vw40ce38beq" path="res://scenes/witch.tscn" id="1_f848o"]
@@ -6,6 +6,9 @@
 [ext_resource type="PackedScene" uid="uid://byyw4cuk8c0vm" path="res://scenes/pink_goblin.tscn" id="3_2gt1r"]
 [ext_resource type="Texture2D" uid="uid://bcmr8lu3d46hd" path="res://assets/Inventory.png" id="4_iawn8"]
 [ext_resource type="Texture2D" uid="uid://b1i7bf2xt13cf" path="res://assets/simpleBackgroundTile.png" id="5_d6d32"]
+[ext_resource type="Script" path="res://scripts/Inventory.cs" id="5_xmwtf"]
+[ext_resource type="PackedScene" uid="uid://cn320bnwu77pd" path="res://item_animated_sprite_2d.tscn" id="6_flddd"]
+[ext_resource type="PackedScene" uid="uid://534fjhjc57pk" path="res://scenes/item.tscn" id="7_hvyiu"]
 
 [sub_resource type="Curve2D" id="Curve2D_6ldnn"]
 _data = {
@@ -45,26 +48,34 @@ offset_bottom = 40.0
 grow_horizontal = 2
 size_flags_horizontal = 0
 texture = ExtResource("4_iawn8")
+script = ExtResource("5_xmwtf")
+
+[node name="AnimatedSprite2D" parent="CanvasLayer/Inventory" instance=ExtResource("6_flddd")]
 
 [node name="pinkGoblin" parent="." instance=ExtResource("3_2gt1r")]
 position = Vector2(449, 228)
 Speed = 0.5
+WeakToType = 2
 
 [node name="pinkGoblin2" parent="." instance=ExtResource("3_2gt1r")]
 position = Vector2(281, 277)
 Speed = 0.5
+WeakToType = 2
 
 [node name="pinkGoblin3" parent="." instance=ExtResource("3_2gt1r")]
 position = Vector2(117, 4)
 Speed = 0.5
+WeakToType = 2
 
 [node name="pinkGoblin4" parent="." instance=ExtResource("3_2gt1r")]
 position = Vector2(252, 431)
 Speed = 0.5
+WeakToType = 2
 
 [node name="pinkGoblin5" parent="." instance=ExtResource("3_2gt1r")]
 position = Vector2(487, 228)
 Speed = 0.5
+WeakToType = 2
 
 [node name="MobSpawnTimer" type="Timer" parent="."]
 autostart = true
@@ -81,5 +92,13 @@ centered = false
 region_enabled = true
 region_rect = Rect2(0, 0, 640, 640)
 
+[node name="Item" parent="." instance=ExtResource("7_hvyiu")]
+position = Vector2(40, 232)
+
+[node name="Item2" parent="." instance=ExtResource("7_hvyiu")]
+position = Vector2(536, 40)
+Type = 2
+
+[connection signal="ItemChanged" from="Witch" to="CanvasLayer/Inventory" method="_on_witch_item_changed"]
 [connection signal="pressed" from="CanvasLayer/QuitButton" to="Witch" method="_on_quit_button_pressed"]
 [connection signal="timeout" from="MobSpawnTimer" to="." method="_on_mob_spawn_timer_timeout"]

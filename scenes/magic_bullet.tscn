@@ -1,13 +1,21 @@
-[gd_scene load_steps=5 format=3 uid="uid://wqd2eildcrmk"]
+[gd_scene load_steps=7 format=3 uid="uid://wqd2eildcrmk"]
 
 [ext_resource type="Script" path="res://scripts/magic_bullet.cs" id="1_j45bt"]
 [ext_resource type="Texture2D" uid="uid://duo1qnhy3y165" path="res://assets/bullet.png" id="1_ly0sv"]
+[ext_resource type="Texture2D" uid="uid://bm7l8gbyovu1k" path="res://assets/EmptyItem.png" id="2_dfso8"]
+[ext_resource type="Texture2D" uid="uid://cbmenksuibcgb" path="res://assets/pinkBullet.png" id="4_8lkly"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ftvhu"]
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": ExtResource("2_dfso8")
+}, {
+"duration": 1.0,
 "texture": ExtResource("1_ly0sv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_8lkly")
 }],
 "loop": true,
 "name": &"default",
@@ -23,6 +31,7 @@ script = ExtResource("1_j45bt")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_ftvhu")
+frame = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_kc5hq")

@@ -3,14 +3,20 @@ using System;
 
 public partial class witch : CharacterBody2D
 {
+	[Signal]
+	public delegate void ItemChangedEventHandler(ItemType itemType);
+	
 	public const float Speed = 100.0f;
 	public bool shooting = false;
 	public bool Invincible = false;
+
+	[Export] public ItemType InventorySlot1 = ItemType.None;
 
 	private Timer _timer;
 	private Timer _invincibilityTimer;
 	private Camera2D _camera;
 	private health_component _healthComponent;
+	
 	
 
 	public override void _Ready()
@@ -54,7 +60,7 @@ public partial class witch : CharacterBody2D
 
 	public void Shoot()
 	{
-		if (shooting == false)
+		if (shooting == false && InventorySlot1 != ItemType.None)
 		{
 			GD.Print("Boom!");
 			shooting = true;
@@ -63,6 +69,7 @@ public partial class witch : CharacterBody2D
 			var inst = scene.Instantiate<magic_bullet>();
 			inst.FriendlyFire = true;
 			inst.GlobalPosition = GlobalPosition;
+			inst.Type = InventorySlot1;
 
 
 			Vector2 mousePos = _camera.GetGlobalMousePosition(); 
@@ -133,6 +140,13 @@ public partial class witch : CharacterBody2D
 					TakeDamageRoutine(1);
 				}
 			}
+		}
+		
+		if(area is item item)
+		{
+			InventorySlot1 = item.Type;
+			item.QueueFree();
+			EmitSignal(SignalName.ItemChanged, (int)InventorySlot1);
 		}
 	}
 

@@ -7,6 +7,9 @@ public partial class magic_bullet : Area2D
 	
 	[Export] 
 	public Vector2 Velocity { get; set; } = Vector2.Zero;
+	
+	[Export] public ItemType Type = ItemType.GreenStaff;
+	
 
 	/// <summary>
 	/// True when this spawned from the witch 
@@ -16,6 +19,8 @@ public partial class magic_bullet : Area2D
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		var animatedSprite2D = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
+		animatedSprite2D.Frame = (int)Type;
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
