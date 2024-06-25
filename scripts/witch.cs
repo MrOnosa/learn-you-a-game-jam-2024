@@ -65,40 +65,40 @@ public partial class witch : CharacterBody2D
 			GD.Print("Boom!");
 			shooting = true;
 			_timer.Start();
-			var scene = GD.Load<PackedScene>("res://scenes/magic_bullet.tscn");
-			var inst = scene.Instantiate<magic_bullet>();
-			inst.FriendlyFire = true;
-			inst.GlobalPosition = GlobalPosition;
-			inst.Type = InventorySlot1;
+			var inst = InitMagicBullet();
 
-
+			//Calc magic bullet velocity for a mouse
 			Vector2 mousePos = _camera.GetGlobalMousePosition(); 
-			
 			Vector2 direction = (mousePos - inst.GlobalPosition).Normalized(); // Calculate the direction to the mouse from the bullet 
-
 			Vector2 velocity = direction * magic_bullet.Speed;
-	
 			inst.Velocity = velocity;
 			
 			AddSibling(inst);
 		}
 	}
 
+	private magic_bullet InitMagicBullet()
+	{
+		var scene = GD.Load<PackedScene>("res://scenes/magic_bullet.tscn");
+		var inst = scene.Instantiate<magic_bullet>();
+		inst.FriendlyFire = true;
+		inst.GlobalPosition = GlobalPosition;
+		inst.Type = InventorySlot1;
+		return inst;
+	}
+
 	public void TwinStickShoot()
 	{
-		if (shooting == false)
+		if (shooting == false && InventorySlot1 != ItemType.None)
 		{
 			GD.Print("Twin Stick Boom!");
 			shooting = true;
 			_timer.Start();
-			var scene = GD.Load<PackedScene>("res://scenes/magic_bullet.tscn");
-			var inst = scene.Instantiate<magic_bullet>();
-			inst.GlobalPosition = GlobalPosition;
+			var inst = InitMagicBullet();
 
-			Vector2 direction = Input.GetVector("TwinStickShootLeft", "TwinStickShootRight", "TwinStickShootUp", "TwinStickShootDown").Normalized(); 
-
+			//Calc magic bullet velocity for twin stick
+			Vector2 direction = Input.GetVector("TwinStickShootLeft", "TwinStickShootRight", "TwinStickShootUp", "TwinStickShootDown").Normalized();
 			Vector2 velocity = direction * magic_bullet.Speed;
-	
 			inst.Velocity = velocity;
 			
 			AddSibling(inst);
