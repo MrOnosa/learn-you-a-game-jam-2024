@@ -16,6 +16,23 @@ public partial class item : Area2D
 	public override void _Process(double delta)
 	{
 	}
+
+	private void _on_life_timer_timeout()
+	{
+		QueueFree();
+	}
+
+	private void _on_visible_on_screen_notifier_2d_screen_exited()
+	{
+		var lifeTimer = GetNode<Timer>("LifeTimer");
+		lifeTimer.Start();
+	}
+
+	private void _on_visible_on_screen_notifier_2d_screen_entered()
+	{
+		var lifeTimer = GetNode<Timer>("LifeTimer");
+		lifeTimer.Stop();
+	}
 }
 
 public enum ItemType

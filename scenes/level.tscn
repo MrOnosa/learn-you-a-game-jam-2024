@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dgimmwg1i8gb0"]
+[gd_scene load_steps=12 format=3 uid="uid://dgimmwg1i8gb0"]
 
 [ext_resource type="Script" path="res://scripts/level.cs" id="1_a0w5b"]
 [ext_resource type="PackedScene" uid="uid://d3vw40ce38beq" path="res://scenes/witch.tscn" id="1_f848o"]
@@ -16,10 +16,17 @@ _data = {
 }
 point_count = 9
 
+[sub_resource type="Curve2D" id="Curve2D_urbfd"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 3, -119, -57.0819, -64.2172, 57.0819, 64.2172, 259, -55, 58.8657, -61.8388, -58.8657, 61.8388, 259, 73, 0, 0, 0, 0, 3, 137, 63.6226, 61.2442, -63.6226, -61.2442, -253, 73, -65.4064, 65.4064, 65.4064, -65.4064, -253, -55, 0, 0, 0, 0, 3, -119)
+}
+point_count = 7
+
 [node name="Level" type="Node2D"]
 script = ExtResource("1_a0w5b")
 GreenMobScene = ExtResource("2_r0ujc")
 PinkMobScene = ExtResource("3_2gt1r")
+PickableStaffScene = ExtResource("7_hvyiu")
 
 [node name="Witch" parent="." instance=ExtResource("1_f848o")]
 position = Vector2(317, 183)
@@ -31,6 +38,15 @@ curve = SubResource("Curve2D_6ldnn")
 [node name="MobSpawnLocation" type="PathFollow2D" parent="Witch/MobPath2D"]
 position = Vector2(-80, -80)
 rotation = -0.172191
+
+[node name="StaffPath2D" type="Path2D" parent="Witch"]
+curve = SubResource("Curve2D_urbfd")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="StaffPathLocation" type="PathFollow2D" parent="Witch/StaffPath2D"]
+position = Vector2(3, -119)
+rotation = 0.244979
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -53,9 +69,6 @@ script = ExtResource("5_xmwtf")
 
 [node name="AnimatedSprite2D" parent="CanvasLayer/Inventory" instance=ExtResource("6_flddd")]
 
-[node name="MobSpawnTimer" type="Timer" parent="."]
-autostart = true
-
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
@@ -68,13 +81,14 @@ centered = false
 region_enabled = true
 region_rect = Rect2(0, 0, 640, 640)
 
-[node name="Item" parent="." instance=ExtResource("7_hvyiu")]
-position = Vector2(40, 232)
+[node name="MobSpawnTimer" type="Timer" parent="."]
+autostart = true
 
-[node name="Item2" parent="." instance=ExtResource("7_hvyiu")]
-position = Vector2(536, 40)
-Type = 2
+[node name="StaffSpawnTimer" type="Timer" parent="."]
+wait_time = 3.0
+autostart = true
 
 [connection signal="ItemChanged" from="Witch" to="CanvasLayer/Inventory" method="_on_witch_item_changed"]
 [connection signal="pressed" from="CanvasLayer/QuitButton" to="Witch" method="_on_quit_button_pressed"]
 [connection signal="timeout" from="MobSpawnTimer" to="." method="_on_mob_spawn_timer_timeout"]
+[connection signal="timeout" from="StaffSpawnTimer" to="." method="_on_staff_spawn_timer_timeout"]

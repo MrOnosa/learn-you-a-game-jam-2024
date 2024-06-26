@@ -17,3 +17,14 @@ shape = SubResource("CapsuleShape2D_gx4ow")
 [node name="AnimatedSprite2D" parent="." instance=ExtResource("2_b3sq7")]
 position = Vector2(0, 0)
 frame = 1
+
+[node name="LifeTimer" type="Timer" parent="."]
+wait_time = 3.0
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(4.76837e-07, 1)
+scale = Vector2(1.8, 2)
+
+[connection signal="timeout" from="LifeTimer" to="." method="_on_life_timer_timeout"]
+[connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

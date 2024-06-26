@@ -7,6 +7,7 @@ public partial class level : Node2D
 {
     [Export] public PackedScene GreenMobScene { get; set; }
     [Export] public PackedScene PinkMobScene { get; set; }
+    [Export] public PackedScene PickableStaffScene { get; set; }
     private CharacterBody2D _witch;
 
     [Export] public int TotalGreenGoblins = 5;
@@ -75,5 +76,23 @@ public partial class level : Node2D
 
         // Spawn the mob by adding it to the Main scene.
         AddChild(mob);
+    }
+
+    private void _on_staff_spawn_timer_timeout()
+    {
+        var allItems = this.GetChildren().OfType<item>().ToList();
+        if (allItems.Count < 4)
+        {
+            var staff = PickableStaffScene.Instantiate<item>();
+            var spawnLocation = GetNode<PathFollow2D>("Witch/StaffPath2D/StaffPathLocation");
+            spawnLocation.ProgressRatio = GD.Randf();
+
+            // Set the mob's position to a random location.
+            staff.GlobalPosition = spawnLocation.GlobalPosition;
+            staff.Type = GD.RandRange(0, 1) == 0 ? ItemType.GreenStaff : ItemType.PinkStaff;
+
+            // Spawn the mob by adding it to the Main scene.
+            AddChild(staff);
+        }
     }
 }
