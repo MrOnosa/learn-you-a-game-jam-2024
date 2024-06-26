@@ -25,6 +25,8 @@ radius = 9.0
 
 [node name="pinkGoblin" type="Area2D"]
 script = ExtResource("1_35ynn")
+Speed = 0.5
+WeakToType = 2
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 material = SubResource("ShaderMaterial_gxkpa")

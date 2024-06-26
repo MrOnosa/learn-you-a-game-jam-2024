@@ -42,7 +42,12 @@ public partial class witch : CharacterBody2D
 		Vector2 velocity = Velocity;
 
 		// Get the input direction and handle the movement/deceleration.
+		var global = GetNode<gm>("/root/GM");
 		Vector2 direction = Input.GetVector("Left", "Right", "Up", "Down");
+		if (global.UsingController)
+		{
+			direction = Input.GetVector("C_Left", "C_Right", "C_Up", "C_Down");
+		}
 		if (direction != Vector2.Zero)
 		{
 			velocity.X = direction.X * Speed;

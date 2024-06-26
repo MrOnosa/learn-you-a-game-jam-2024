@@ -25,6 +25,7 @@ radius = 9.0
 height = 32.0
 
 [node name="Witch" type="CharacterBody2D"]
+motion_mode = 1
 script = ExtResource("1_uilfk")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

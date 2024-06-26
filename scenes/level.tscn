@@ -18,7 +18,8 @@ point_count = 9
 
 [node name="Level" type="Node2D"]
 script = ExtResource("1_a0w5b")
-MobScene = ExtResource("2_r0ujc")
+GreenMobScene = ExtResource("2_r0ujc")
+PinkMobScene = ExtResource("3_2gt1r")
 
 [node name="Witch" parent="." instance=ExtResource("1_f848o")]
 position = Vector2(317, 183)
@@ -51,31 +52,6 @@ texture = ExtResource("4_iawn8")
 script = ExtResource("5_xmwtf")
 
 [node name="AnimatedSprite2D" parent="CanvasLayer/Inventory" instance=ExtResource("6_flddd")]
-
-[node name="pinkGoblin" parent="." instance=ExtResource("3_2gt1r")]
-position = Vector2(449, 228)
-Speed = 0.5
-WeakToType = 2
-
-[node name="pinkGoblin2" parent="." instance=ExtResource("3_2gt1r")]
-position = Vector2(281, 277)
-Speed = 0.5
-WeakToType = 2
-
-[node name="pinkGoblin3" parent="." instance=ExtResource("3_2gt1r")]
-position = Vector2(117, 4)
-Speed = 0.5
-WeakToType = 2
-
-[node name="pinkGoblin4" parent="." instance=ExtResource("3_2gt1r")]
-position = Vector2(252, 431)
-Speed = 0.5
-WeakToType = 2
-
-[node name="pinkGoblin5" parent="." instance=ExtResource("3_2gt1r")]
-position = Vector2(487, 228)
-Speed = 0.5
-WeakToType = 2
 
 [node name="MobSpawnTimer" type="Timer" parent="."]
 autostart = true
