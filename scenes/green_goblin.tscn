@@ -45,6 +45,7 @@ height = 40.0
 
 [node name="greenGoblin" type="Area2D"]
 script = ExtResource("1_v5pvm")
+Speed = 0.5
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 material = SubResource("ShaderMaterial_xk6ju")

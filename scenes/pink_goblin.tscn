@@ -1,13 +1,46 @@
-[gd_scene load_steps=8 format=3 uid="uid://byyw4cuk8c0vm"]
+[gd_scene load_steps=17 format=3 uid="uid://byyw4cuk8c0vm"]
 
 [ext_resource type="Script" path="res://scripts/green_goblin.cs" id="1_35ynn"]
 [ext_resource type="Shader" path="res://scenes/goblin.gdshader" id="2_8f73q"]
 [ext_resource type="Texture2D" uid="uid://dvhn0uqbcnaj6" path="res://assets/characters/enemyP_placeholder.png" id="2_fcco1"]
 [ext_resource type="PackedScene" uid="uid://pkfb6tq1qoo4" path="res://scenes/health_component.tscn" id="3_wmmdj"]
+[ext_resource type="Texture2D" uid="uid://0baqyc5ev8i6" path="res://assets/enemy1_anim-Sheet.png" id="4_lnbxw"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gxkpa"]
 shader = ExtResource("2_8f73q")
 shader_parameter/hurt = false
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cxxwj"]
+atlas = ExtResource("4_lnbxw")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f6lq0"]
+atlas = ExtResource("4_lnbxw")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8gqpj"]
+atlas = ExtResource("4_lnbxw")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_et50m"]
+atlas = ExtResource("4_lnbxw")
+region = Rect2(0, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jla3u"]
+atlas = ExtResource("4_lnbxw")
+region = Rect2(64, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hv8ad"]
+atlas = ExtResource("4_lnbxw")
+region = Rect2(128, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7mytg"]
+atlas = ExtResource("4_lnbxw")
+region = Rect2(0, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bs4hu"]
+atlas = ExtResource("4_lnbxw")
+region = Rect2(64, 128, 64, 64)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_o0fwx"]
 animations = [{
@@ -18,22 +51,55 @@ animations = [{
 "loop": true,
 "name": &"default",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cxxwj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f6lq0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8gqpj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_et50m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jla3u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hv8ad")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7mytg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bs4hu")
+}],
+"loop": true,
+"name": &"running",
+"speed": 12.0
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_m1pke"]
-radius = 9.0
+radius = 14.0
 
 [node name="pinkGoblin" type="Area2D"]
 script = ExtResource("1_35ynn")
-Speed = 0.5
+Speed = 1.5
 WeakToType = 2
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 material = SubResource("ShaderMaterial_gxkpa")
+position = Vector2(0, -8)
 sprite_frames = SubResource("SpriteFrames_o0fwx")
+animation = &"running"
+autoplay = "running"
+frame_progress = 0.388992
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 1)
+position = Vector2(1, 4)
 shape = SubResource("CapsuleShape2D_m1pke")
 
 [node name="HealthComponent" parent="." instance=ExtResource("3_wmmdj")]

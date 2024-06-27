@@ -42,7 +42,7 @@ text = "Credits"
 [node name="QuitGameButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 focus_neighbor_bottom = NodePath("../StartButton")
-text = "Guit Game
+text = "Quit Game
 "
 
 [connection signal="pressed" from="VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
