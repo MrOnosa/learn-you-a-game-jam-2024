@@ -7,6 +7,10 @@ public partial class green_goblin : Area2D
     [Export] public float BulletFireWaitTime = 1.0f;
     [Export] public float BulletFireVariance = 0.5f;
     [Export] public ItemType WeakToType = ItemType.GreenStaff;
+    
+    
+    [Signal]
+    public delegate void DeadEventHandler();
 
     private AnimatedSprite2D _animatedSprite2D;
     private health_component _healthComponent;
@@ -108,6 +112,8 @@ public partial class green_goblin : Area2D
     {
         //TODO: Death animation or something
         QueueFree();
+        
+        EmitSignal(SignalName.Dead);
     }
 
     private void _on_shoot_bullet_timer_timeout()

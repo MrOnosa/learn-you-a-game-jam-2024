@@ -8,14 +8,44 @@ public partial class level : Node2D
     [Export] public PackedScene GreenMobScene { get; set; }
     [Export] public PackedScene PinkMobScene { get; set; }
     [Export] public PackedScene PickableStaffScene { get; set; }
+
+    /// <summary>
+    /// The current stage, zero index based. The first stage the player plays is 0.
+    /// </summary>
+    [Export] public int CurrentStage { get; set; }
+    public List<Stage> Stages { get; set; } = new List<Stage>();
+
+    
+    private Label _waveCountLabel;
     private CharacterBody2D _witch;
-
-    [Export] public int TotalGreenGoblins = 5;
-    [Export] public int TotalPinkGoblins = 6;
-
     public override void _Ready()
     {
         _witch = GetNode<CharacterBody2D>("Witch");
+        _waveCountLabel = GetNode<Label>("CanvasLayer/WaveCountLabel");
+
+        Stages = new List<Stage>()
+        {
+            new Stage()
+            {
+                TotalGreenGoblins = 0,
+                TotalPinkGoblins = 3
+            },
+            new Stage()
+            {
+                TotalGreenGoblins = 3,
+                TotalPinkGoblins = 0
+            },
+            new Stage()
+            {
+                TotalGreenGoblins = 10,
+                TotalPinkGoblins = 10
+            },
+            new Stage()
+            {
+                TotalGreenGoblins = 100,
+                TotalPinkGoblins = 100
+            }
+        };
     }
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -39,12 +69,17 @@ public partial class level : Node2D
     private void _on_mob_spawn_timer_timeout()
     {
         var goblinBag = new List<char>();
-        for (int i = 0; i < TotalGreenGoblins; i++)
+        Stage currentStage = null;
+        if(Stages.Count > CurrentStage )
+            currentStage = Stages[CurrentStage];
+        if (currentStage == null) return;
+        
+        for (int i = 0; i < currentStage.TotalGreenGoblins; i++)
         {
             goblinBag.Add('G');
         }
 
-        for (int i = 0; i < TotalPinkGoblins; i++)
+        for (int i = 0; i < currentStage.TotalPinkGoblins; i++)
         {
             goblinBag.Add('P');
         }
@@ -59,11 +94,11 @@ public partial class level : Node2D
         switch (winner)
         {
             case 'G':
-                TotalGreenGoblins--;
+                currentStage.TotalGreenGoblins--;
                 mob = GreenMobScene.Instantiate<green_goblin>();
                 break;
             case 'P':
-                TotalPinkGoblins--;
+                currentStage.TotalPinkGoblins--;
                 mob = PinkMobScene.Instantiate<green_goblin>();
                 break;
         }
@@ -73,9 +108,32 @@ public partial class level : Node2D
 
         // Set the mob's position to a random location.
         mob.GlobalPosition = mobSpawnLocation.GlobalPosition;
+        mob.Dead += _mob_died_handler;
 
         // Spawn the mob by adding it to the Main scene.
         AddChild(mob);
+    }
+
+    private async void _mob_died_handler()
+    {
+        // Short pause to let things settle. 
+        await ToSignal(GetTree().CreateTimer(1), "timeout");
+        
+        Stage currentStage = null;
+        if(Stages.Count > CurrentStage )
+            currentStage = Stages[CurrentStage];
+        if (currentStage == null 
+            /* If the following is true, there are more mobs yet to be spawned. We should wait for all of them */
+            || currentStage.TotalPinkGoblins + currentStage.TotalGreenGoblins > 0 ) return;
+        
+        // Check if any goblins are still on the screen
+        var allGoblins = this.GetChildren().OfType<green_goblin>().ToList();
+        if (allGoblins.Count == 0)
+        {
+            // The last mob died. New wave!
+            CurrentStage++;
+            _waveCountLabel.Text = (CurrentStage + 1).ToString();
+        }
     }
 
     private void _on_staff_spawn_timer_timeout()
@@ -95,4 +153,12 @@ public partial class level : Node2D
             AddChild(staff);
         }
     }
+}
+
+
+
+public partial class Stage 
+{
+    [Export] public int TotalGreenGoblins = 5;
+    [Export] public int TotalPinkGoblins = 6;
 }

@@ -69,6 +69,27 @@ script = ExtResource("5_xmwtf")
 
 [node name="AnimatedSprite2D" parent="CanvasLayer/Inventory" instance=ExtResource("6_flddd")]
 
+[node name="WaveLabel" type="Label" parent="CanvasLayer"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -43.0
+offset_bottom = 23.0
+grow_horizontal = 0
+size_flags_horizontal = 8
+text = "Wave       "
+
+[node name="WaveCountLabel" type="Label" parent="CanvasLayer"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -28.0
+offset_right = -4.0
+offset_bottom = 23.0
+grow_horizontal = 0
+text = "1"
+horizontal_alignment = 2
+
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
