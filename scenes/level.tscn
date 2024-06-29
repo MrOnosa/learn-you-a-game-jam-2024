@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dgimmwg1i8gb0"]
+[gd_scene load_steps=13 format=3 uid="uid://dgimmwg1i8gb0"]
 
 [ext_resource type="Script" path="res://scripts/level.cs" id="1_a0w5b"]
 [ext_resource type="PackedScene" uid="uid://d3vw40ce38beq" path="res://scenes/witch.tscn" id="1_f848o"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://scripts/Inventory.cs" id="5_xmwtf"]
 [ext_resource type="PackedScene" uid="uid://cn320bnwu77pd" path="res://item_animated_sprite_2d.tscn" id="6_flddd"]
 [ext_resource type="PackedScene" uid="uid://534fjhjc57pk" path="res://scenes/item.tscn" id="7_hvyiu"]
+[ext_resource type="PackedScene" uid="uid://b1rd3bj57wgm2" path="res://scenes/life_bar.tscn" id="9_njkyc"]
 
 [sub_resource type="Curve2D" id="Curve2D_6ldnn"]
 _data = {
@@ -90,6 +91,9 @@ grow_horizontal = 0
 text = "1"
 horizontal_alignment = 2
 
+[node name="LifeBar" parent="CanvasLayer" instance=ExtResource("9_njkyc")]
+position = Vector2(4, 324)
+
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
@@ -109,6 +113,7 @@ autostart = true
 wait_time = 3.0
 autostart = true
 
+[connection signal="HealthChanged" from="Witch" to="." method="_on_witch_health_changed"]
 [connection signal="ItemChanged" from="Witch" to="CanvasLayer/Inventory" method="_on_witch_item_changed"]
 [connection signal="pressed" from="CanvasLayer/QuitButton" to="Witch" method="_on_quit_button_pressed"]
 [connection signal="timeout" from="MobSpawnTimer" to="." method="_on_mob_spawn_timer_timeout"]

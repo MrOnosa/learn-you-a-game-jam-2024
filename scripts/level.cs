@@ -153,6 +153,12 @@ public partial class level : Node2D
             AddChild(staff);
         }
     }
+    
+    private void _on_witch_health_changed(HealthUpdate healthUpdate)
+    {
+        var lifeBar = GetNode<life_bar>("CanvasLayer/LifeBar");
+        lifeBar.Paint(healthUpdate.CurrentHealth);
+    }
 }
 
 

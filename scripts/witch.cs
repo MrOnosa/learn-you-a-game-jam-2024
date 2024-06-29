@@ -5,6 +5,8 @@ public partial class witch : CharacterBody2D
 {
 	[Signal]
 	public delegate void ItemChangedEventHandler(ItemType itemType);
+	[Signal]
+	public delegate void HealthChangedEventHandler(HealthUpdate healthUpdate);
 	
 	public const float Speed = 100.0f;
 	public bool shooting = false;
@@ -120,9 +122,9 @@ public partial class witch : CharacterBody2D
 		GetTree().Quit();
 	}
 
-	private void _on_health_component_health_changed(HealthUpdate update)
+	private void _on_health_component_health_changed(HealthUpdate healthUpdate)
 	{
-		GD.Print($"HP: {update.CurrentHealth}");
+		EmitSignal(SignalName.HealthChanged, healthUpdate);
 	}
 
 	private void _on_health_component_died()
