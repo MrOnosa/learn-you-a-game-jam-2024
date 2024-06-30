@@ -113,6 +113,7 @@ autostart = true
 wait_time = 3.0
 autostart = true
 
+[connection signal="Died" from="Witch" to="." method="_on_witch_died"]
 [connection signal="HealthChanged" from="Witch" to="." method="_on_witch_health_changed"]
 [connection signal="ItemChanged" from="Witch" to="CanvasLayer/Inventory" method="_on_witch_item_changed"]
 [connection signal="pressed" from="CanvasLayer/QuitButton" to="Witch" method="_on_quit_button_pressed"]

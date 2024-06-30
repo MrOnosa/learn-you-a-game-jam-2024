@@ -30,6 +30,10 @@ window/stretch/mode="viewport"
 
 project/assembly_name="Learn-you-a-game-jam-2024"
 
+[gui]
+
+theme/custom_font="res://assets/fonts/Xolonium-Regular.ttf"
+
 [input]
 
 Up={

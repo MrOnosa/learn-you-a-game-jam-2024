@@ -4,6 +4,7 @@ using System;
 public partial class gm : Node
 {
 	[Export] public bool UsingController = false;
+	public Stats GameStats { get; set; }
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()

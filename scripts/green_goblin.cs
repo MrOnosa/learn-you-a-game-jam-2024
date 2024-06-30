@@ -10,7 +10,7 @@ public partial class green_goblin : Area2D
     
     
     [Signal]
-    public delegate void DeadEventHandler();
+    public delegate void DeadEventHandler(ItemType type);
 
     private AnimatedSprite2D _animatedSprite2D;
     private health_component _healthComponent;
@@ -113,7 +113,7 @@ public partial class green_goblin : Area2D
         //TODO: Death animation or something
         QueueFree();
         
-        EmitSignal(SignalName.Dead);
+        EmitSignal(SignalName.Dead, (int)WeakToType);
     }
 
     private void _on_shoot_bullet_timer_timeout()

@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://dcvmpuuwg1eof"]
+[gd_scene load_steps=3 format=3 uid="uid://dcvmpuuwg1eof"]
 
 [ext_resource type="Script" path="res://scripts/title.cs" id="1_oxmii"]
+[ext_resource type="FontFile" uid="uid://dng2s801fsbhl" path="res://assets/fonts/Xolonium-Regular.ttf" id="2_4ns7a"]
 
 [node name="Title" type="Control"]
 layout_mode = 3
@@ -28,6 +29,8 @@ grow_vertical = 2
 [node name="StartButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 focus_neighbor_top = NodePath("../QuitGameButton")
+theme_override_fonts/font = ExtResource("2_4ns7a")
+theme_override_font_sizes/font_size = 64
 text = "Start Game"
 
 [node name="OptionButton" type="Button" parent="VBoxContainer"]

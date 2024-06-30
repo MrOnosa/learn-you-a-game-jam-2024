@@ -16,11 +16,13 @@ public partial class level : Node2D
     [Export] public int CurrentStage { get; set; }
     public List<Stage> Stages { get; set; } = new List<Stage>();
 
-    
+
+    private Stats _stats;
     private Label _waveCountLabel;
     private CharacterBody2D _witch;
     public override void _Ready()
     {
+        _stats = new Stats();
         global = GetNode<gm>("/root/GM");
         var audioPlayer = global.GetNode<AudioStreamPlayer>("AudioStreamPlayer");
         audioPlayer.Stop();
@@ -58,6 +60,7 @@ public partial class level : Node2D
     // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _Process(double delta)
     {
+        _stats.SurvivalTime += delta;
     }
 
     public override void _PhysicsProcess(double delta)
@@ -121,8 +124,17 @@ public partial class level : Node2D
         AddChild(mob);
     }
 
-    private async void _mob_died_handler()
+    private async void _mob_died_handler(ItemType type)
     {
+        switch (type)
+        {
+            case ItemType.GreenStaff:
+                _stats.TotalDeadGreenGoblins++;
+                break;
+            case ItemType.PinkStaff:
+                _stats.TotalDeadPinkGoblins++;
+                break;
+        }
         // Short pause to let things settle. 
         await ToSignal(GetTree().CreateTimer(1), "timeout");
         
@@ -165,17 +177,29 @@ public partial class level : Node2D
     {
         var lifeBar = GetNode<life_bar>("CanvasLayer/LifeBar");
         lifeBar.Paint(healthUpdate.CurrentHealth);
-        if (healthUpdate.CurrentHealth <= 0)
-        {
-            GetTree().ChangeSceneToFile("res://scenes/game_over.tscn");
-        }
+    }
+
+    private void _on_witch_died()
+    {
+        //TODO: Death animation
+
+        global.GameStats = _stats;
+        var p = GD.Load<PackedScene>("res://scenes/game_over.tscn");
+        GetTree().ChangeSceneToPacked(p);
     }
 }
 
 
 
-public partial class Stage 
+public class Stage 
 {
-    [Export] public int TotalGreenGoblins = 5;
-    [Export] public int TotalPinkGoblins = 6;
+    public int TotalGreenGoblins = 5;
+    public int TotalPinkGoblins = 6;
+}
+
+public class Stats
+{
+    public int TotalDeadGreenGoblins;
+    public int TotalDeadPinkGoblins;
+    public double SurvivalTime;
 }

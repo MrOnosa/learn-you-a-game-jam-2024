@@ -14,9 +14,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -123.0
-offset_top = -68.0
+offset_top = -24.5
 offset_right = 123.0
-offset_bottom = 68.0
+offset_bottom = 112.5
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -38,6 +38,29 @@ layout_mode = 2
 focus_neighbor_bottom = NodePath("../RestartButton")
 text = "Quit Game
 "
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -43.5
+offset_top = 42.0
+offset_right = 43.5
+offset_bottom = 65.0
+grow_horizontal = 2
+text = "Game Over"
+
+[node name="StatsLabel" type="Label" parent="CanvasLayer"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -304.0
+offset_top = 63.0
+offset_right = 304.0
+offset_bottom = 86.0
+grow_horizontal = 2
+text = "You defeated 2 Green Goblins, 3 Pink Goblins, and survived for 123.43 seconds."
+autowrap_mode = 3
 
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/RestartButton" to="." method="_on_restart_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/ReturnToMainMenuButton" to="." method="_on_return_to_main_menu_button_pressed"]

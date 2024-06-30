@@ -7,6 +7,8 @@ public partial class witch : CharacterBody2D
 	public delegate void ItemChangedEventHandler(ItemType itemType);
 	[Signal]
 	public delegate void HealthChangedEventHandler(HealthUpdate healthUpdate);
+	[Signal]
+	public delegate void DiedEventHandler();
 	
 	public const float Speed = 100.0f;
 	public bool shooting = false;
@@ -129,7 +131,7 @@ public partial class witch : CharacterBody2D
 
 	private void _on_health_component_died()
 	{
-		GetTree().ChangeSceneToFile("res://scenes/title.tscn");
+		EmitSignal(SignalName.Died);
 	}
 
 	private void _on_hit_box_area_2d_area_entered(Area2D area)
