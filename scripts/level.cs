@@ -5,6 +5,7 @@ using System.Linq;
 
 public partial class level : Node2D
 {
+    private gm global;
     [Export] public PackedScene GreenMobScene { get; set; }
     [Export] public PackedScene PinkMobScene { get; set; }
     [Export] public PackedScene PickableStaffScene { get; set; }
@@ -20,6 +21,12 @@ public partial class level : Node2D
     private CharacterBody2D _witch;
     public override void _Ready()
     {
+        global = GetNode<gm>("/root/GM");
+        var audioPlayer = global.GetNode<AudioStreamPlayer>("AudioStreamPlayer");
+        audioPlayer.Stop();
+        audioPlayer.Stream = GD.Load<AudioStream>("res://assets/music/Game_Jam_Rise_of_Rinkollette_Main_Song_trimmed_normalized.mp3");
+        audioPlayer.Play();
+        
         _witch = GetNode<CharacterBody2D>("Witch");
         _waveCountLabel = GetNode<Label>("CanvasLayer/WaveCountLabel");
 
@@ -158,6 +165,10 @@ public partial class level : Node2D
     {
         var lifeBar = GetNode<life_bar>("CanvasLayer/LifeBar");
         lifeBar.Paint(healthUpdate.CurrentHealth);
+        if (healthUpdate.CurrentHealth <= 0)
+        {
+            GetTree().ChangeSceneToFile("res://scenes/game_over.tscn");
+        }
     }
 }
 

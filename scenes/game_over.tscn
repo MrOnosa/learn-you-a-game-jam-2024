@@ -1,0 +1,44 @@
+[gd_scene load_steps=2 format=3 uid="uid://by73lgy4ga3im"]
+
+[ext_resource type="Script" path="res://scripts/game_over.cs" id="1_07avt"]
+
+[node name="GameOver" type="Node2D"]
+script = ExtResource("1_07avt")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -123.0
+offset_top = -68.0
+offset_right = 123.0
+offset_bottom = 68.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RestartButton" type="Button" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+focus_neighbor_top = NodePath("../QuitGameButton")
+text = "Try Again"
+
+[node name="Spacer" type="Control" parent="CanvasLayer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+
+[node name="ReturnToMainMenuButton" type="Button" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+text = "Return to Main Menu"
+
+[node name="QuitGameButton" type="Button" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+focus_neighbor_bottom = NodePath("../RestartButton")
+text = "Quit Game
+"
+
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/RestartButton" to="." method="_on_restart_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/ReturnToMainMenuButton" to="." method="_on_return_to_main_menu_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/QuitGameButton" to="." method="_on_quit_game_button_pressed"]
