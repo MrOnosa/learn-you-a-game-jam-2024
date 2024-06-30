@@ -1,24 +1,17 @@
-[gd_scene load_steps=5 format=3 uid="uid://b1rd3bj57wgm2"]
+[gd_scene load_steps=3 format=3 uid="uid://b1rd3bj57wgm2"]
 
-[ext_resource type="Texture2D" uid="uid://cw2qthosy2k2i" path="res://assets/Life-Sheet.png" id="1_gwnyt"]
 [ext_resource type="Script" path="res://scripts/life_bar.cs" id="1_kx05c"]
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6j7ce"]
-texture = ExtResource("1_gwnyt")
-texture_region_size = Vector2i(32, 32)
-0:0/0 = 0
-1:0/0 = 0
-
-[sub_resource type="TileSet" id="TileSet_ynv37"]
-tile_size = Vector2i(32, 32)
-sources/1 = SubResource("TileSetAtlasSource_6j7ce")
+[ext_resource type="PackedScene" uid="uid://cg5s1q0fwrrfn" path="res://scenes/life_heart.tscn" id="2_d32fv"]
 
 [node name="LifeBar" type="Node2D"]
 script = ExtResource("1_kx05c")
+HeartScene = ExtResource("2_d32fv")
 
-[node name="TileMap" type="TileMap" parent="."]
-tile_set = SubResource("TileSet_ynv37")
-rendering_quadrant_size = 32
-format = 2
-layer_0/name = "Hearts"
-layer_0/tile_data = PackedInt32Array(0, 1, 0, 1, 1, 0, 2, 65537, 0)
+[node name="LifeHeart" parent="." instance=ExtResource("2_d32fv")]
+
+[node name="LifeHeart2" parent="." instance=ExtResource("2_d32fv")]
+position = Vector2(32, 0)
+
+[node name="LifeHeart3" parent="." instance=ExtResource("2_d32fv")]
+position = Vector2(64, 0)
+frame = 1

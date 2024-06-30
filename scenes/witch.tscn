@@ -114,7 +114,7 @@ material = SubResource("ShaderMaterial_s5etq")
 sprite_frames = SubResource("SpriteFrames_n4ikc")
 animation = &"idle"
 autoplay = "idle"
-frame_progress = 0.0706968
+frame_progress = 0.759287
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false

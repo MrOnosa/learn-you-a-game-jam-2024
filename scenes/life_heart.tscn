@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://cg5s1q0fwrrfn"]
+
+[ext_resource type="Texture2D" uid="uid://cw2qthosy2k2i" path="res://assets/Life-Sheet.png" id="1_5ebak"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gyuyp"]
+atlas = ExtResource("1_5ebak")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q1euh"]
+atlas = ExtResource("1_5ebak")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ulddy"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gyuyp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q1euh")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="LifeHeart" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_ulddy")

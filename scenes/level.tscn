@@ -92,7 +92,7 @@ text = "1"
 horizontal_alignment = 2
 
 [node name="LifeBar" parent="CanvasLayer" instance=ExtResource("9_njkyc")]
-position = Vector2(4, 324)
+position = Vector2(20, 340)
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
