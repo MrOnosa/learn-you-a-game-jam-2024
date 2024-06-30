@@ -4,6 +4,7 @@
 [ext_resource type="AudioStream" uid="uid://cc0ag7c05p2q0" path="res://assets/music/Game_Jam_Rise_of_Rinkollette_Title_Song_trimmed_normalized.mp3" id="2_xmf0g"]
 
 [node name="GM" type="Node"]
+process_mode = 3
 script = ExtResource("1_ffesr")
 Volume = 0.7
 

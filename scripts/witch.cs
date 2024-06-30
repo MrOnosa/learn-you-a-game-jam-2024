@@ -118,11 +118,6 @@ public partial class witch : CharacterBody2D
 	{
 		shooting = false;
 	}
-	
-	private void _on_quit_button_pressed()
-	{
-		GetTree().Quit();
-	}
 
 	private void _on_health_component_health_changed(HealthUpdate healthUpdate)
 	{
