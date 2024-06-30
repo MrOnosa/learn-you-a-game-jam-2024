@@ -5,7 +5,13 @@
 
 [node name="GM" type="Node"]
 script = ExtResource("1_ffesr")
+Volume = 0.7
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_xmf0g")
 autoplay = true
+
+[node name="SettingsDebouncingTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="SettingsDebouncingTimer" to="." method="_on_settings_debouncing_timer_timeout"]

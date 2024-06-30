@@ -1,0 +1,122 @@
+[gd_scene load_steps=4 format=3 uid="uid://c71arh254nxdo"]
+
+[ext_resource type="Script" path="res://scripts/credits.cs" id="1_3mnrr"]
+[ext_resource type="Texture2D" uid="uid://c00xqm203a6vp" path="res://assets/complete_roster_resized.png" id="2_p6dwb"]
+[ext_resource type="Theme" uid="uid://ckmr1h7feqetv" path="res://scenes/credits_theme.tres" id="3_w5eoc"]
+
+[node name="Credits" type="Node2D"]
+script = ExtResource("1_3mnrr")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+offset_left = 98.0
+offset_right = 738.0
+offset_bottom = 360.0
+texture = ExtResource("2_p6dwb")
+
+[node name="Button" type="Button" parent="CanvasLayer"]
+offset_left = 13.0
+offset_top = 312.0
+offset_right = 184.0
+offset_bottom = 340.0
+size_flags_horizontal = 8
+text = "Main Menu
+"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
+custom_minimum_size = Vector2(200, 0)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -313.0
+offset_top = -138.0
+offset_right = 228.0
+offset_bottom = 126.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("3_w5eoc")
+
+[node name="Label" type="Label" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 26
+text = "Credits"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Programmer:"
+
+[node name="Label2" type="Label" parent="CanvasLayer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Captain_Onosa"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "Music:"
+
+[node name="Label2" type="Label" parent="CanvasLayer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "Romulus4444"
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+text = "Pixel Artwork:"
+
+[node name="Label2" type="Label" parent="CanvasLayer/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+text = "Urushianaki"
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/VBoxContainer/HBoxContainer4"]
+layout_mode = 2
+text = "Artwork:"
+
+[node name="Label2" type="Label" parent="CanvasLayer/VBoxContainer/HBoxContainer4"]
+layout_mode = 2
+text = "Artiks"
+
+[node name="Control2" type="Control" parent="CanvasLayer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 55)
+layout_mode = 2
+
+[node name="HBoxContainer5" type="HBoxContainer" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/VBoxContainer/HBoxContainer5"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+text = "Font:"
+
+[node name="Label2" type="Label" parent="CanvasLayer/VBoxContainer/HBoxContainer5"]
+layout_mode = 2
+text = "Xolonium "
+
+[node name="HBoxContainer6" type="HBoxContainer" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="CanvasLayer/VBoxContainer/HBoxContainer6"]
+layout_mode = 2
+text = "https://fontlibrary.org/
+en/font/xolonium"
+
+[connection signal="pressed" from="CanvasLayer/Button" to="." method="_on_button_pressed"]

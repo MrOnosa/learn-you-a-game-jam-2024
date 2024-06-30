@@ -46,13 +46,13 @@ public partial class level : Node2D
             },
             new Stage()
             {
-                TotalGreenGoblins = 10,
-                TotalPinkGoblins = 10
+                TotalGreenGoblins = 2,
+                TotalPinkGoblins = 2
             },
             new Stage()
             {
-                TotalGreenGoblins = 100,
-                TotalPinkGoblins = 100
+                TotalGreenGoblins = 10,
+                TotalPinkGoblins = 10
             }
         };
     }
@@ -139,8 +139,18 @@ public partial class level : Node2D
         await ToSignal(GetTree().CreateTimer(1), "timeout");
         
         Stage currentStage = null;
-        if(Stages.Count > CurrentStage )
+        if (Stages.Count > CurrentStage)
+        {
             currentStage = Stages[CurrentStage];
+        }
+        else
+        {
+            //Victory!!!
+            
+            global.GameStats = _stats;
+            GetTree().ChangeSceneToFile("res://scenes/victory.tscn");
+            return;
+        }
         if (currentStage == null 
             /* If the following is true, there are more mobs yet to be spawned. We should wait for all of them */
             || currentStage.TotalPinkGoblins + currentStage.TotalGreenGoblins > 0 ) return;
@@ -184,8 +194,7 @@ public partial class level : Node2D
         //TODO: Death animation
 
         global.GameStats = _stats;
-        var p = GD.Load<PackedScene>("res://scenes/game_over.tscn");
-        GetTree().ChangeSceneToPacked(p);
+        GetTree().ChangeSceneToFile("res://scenes/game_over.tscn");
     }
 }
 

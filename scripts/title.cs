@@ -14,6 +14,9 @@ public partial class title : Control
 		audioPlayer.Stream = GD.Load<AudioStream>("res://assets/music/Game_Jam_Rise_of_Rinkollette_Title_Song_trimmed_normalized.mp3");
 		audioPlayer.Play();
 		GetNode<Button>("VBoxContainer/StartButton").GrabFocus();
+
+		var slider = GetNode<HSlider>("VBoxContainer/HBoxContainer/VolumeSlider");
+		slider.Value = global.Volume * 100;
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -25,10 +28,21 @@ public partial class title : Control
 	{
 		GetTree().ChangeSceneToFile("res://scenes/level.tscn");
 	}
+
+	private void _on_credits_button_pressed()
+	{
+		
+		GetTree().ChangeSceneToFile("res://scenes/credits.tscn");
+	}
 	
 	private void _on_quit_game_button_pressed()
 	{
 		GetTree().Quit();
+	}
+
+	private void _on_volume_slider_value_changed(float value)
+	{
+		global.SetVolume(value / 100.0f);
 	}
 	
 }
