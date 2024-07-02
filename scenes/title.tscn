@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dcvmpuuwg1eof"]
+[gd_scene load_steps=11 format=3 uid="uid://dcvmpuuwg1eof"]
 
 [ext_resource type="Script" path="res://scripts/title.cs" id="1_oxmii"]
 [ext_resource type="FontFile" uid="uid://dng2s801fsbhl" path="res://assets/fonts/Xolonium-Regular.ttf" id="2_4ns7a"]
@@ -37,34 +37,8 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 1)
 }
 
-[sub_resource type="Animation" id="Animation_cp4eh"]
-length = 0.001
-tracks/0/type = "bezier"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position:x")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-tracks/1/type = "bezier"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:position:y")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_7vib1"]
 _data = {
-"RESET": SubResource("Animation_cp4eh"),
 "new_animation": SubResource("Animation_c2qqe")
 }
 
@@ -93,34 +67,8 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 1)
 }
 
-[sub_resource type="Animation" id="Animation_0rq67"]
-length = 0.001
-tracks/0/type = "bezier"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Logo:position:x")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-tracks/1/type = "bezier"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Logo:position:y")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(15, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_l8dgm"]
 _data = {
-"RESET": SubResource("Animation_0rq67"),
 "first": SubResource("Animation_larbs")
 }
 
@@ -147,6 +95,8 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 112.0
+offset_right = 112.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_n0d2y")
@@ -216,9 +166,9 @@ text = "Start
 Goblin Mode"
 
 [node name="Logo" type="TextureRect" parent="."]
-offset_top = 15.0
+layout_mode = 0
+offset_top = -93.0
 offset_right = 320.0
-offset_bottom = 108.0
 texture = ExtResource("4_jei56")
 expand_mode = 3
 
