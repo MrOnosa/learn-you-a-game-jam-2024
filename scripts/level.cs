@@ -32,29 +32,51 @@ public partial class level : Node2D
         _witch = GetNode<CharacterBody2D>("Witch");
         _waveCountLabel = GetNode<Label>("CanvasLayer/WaveCountLabel");
 
-        Stages = new List<Stage>()
+        GetNode<Label>("CanvasLayer/GoblinModeLabel").Visible = global.GoblinMode;
+        if (global.GoblinMode)
         {
-            new Stage()
+            // One thousand years ago...
+             // Goblins ruled the scene...
+            // There was no stopping the goblins...
+            // The goblins gonna getcha...
+
+            GetNode<Label>("CanvasLayer/GoblinModeLabel").Visible = true;
+            Stages = new List<Stage>()
             {
-                TotalGreenGoblins = 0,
-                TotalPinkGoblins = 3
-            },
-            new Stage()
+                new Stage()
+                {
+                    TotalGreenGoblins = 2,
+                    TotalPinkGoblins = 2
+                }
+            };
+        }
+        else
+        {
+            GetNode<Label>("CanvasLayer/GoblinModeLabel").Visible = false;
+            Stages = new List<Stage>()
             {
-                TotalGreenGoblins = 3,
-                TotalPinkGoblins = 0
-            },
-            new Stage()
-            {
-                TotalGreenGoblins = 2,
-                TotalPinkGoblins = 2
-            },
-            new Stage()
-            {
-                TotalGreenGoblins = 10,
-                TotalPinkGoblins = 10
-            }
-        };
+                new Stage()
+                {
+                    TotalGreenGoblins = 0,
+                    TotalPinkGoblins = 3
+                },
+                new Stage()
+                {
+                    TotalGreenGoblins = 3,
+                    TotalPinkGoblins = 0
+                },
+                new Stage()
+                {
+                    TotalGreenGoblins = 2,
+                    TotalPinkGoblins = 2
+                },
+                new Stage()
+                {
+                    TotalGreenGoblins = 10,
+                    TotalPinkGoblins = 10
+                }
+            };
+        }
     }
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -161,7 +183,20 @@ public partial class level : Node2D
         {
             // The last mob died. New wave!
             CurrentStage++;
+            _stats.Wave = CurrentStage + 1;
             _waveCountLabel.Text = (CurrentStage + 1).ToString();
+            
+            if (global.GoblinMode)
+            {
+                // Goblins gonna goblin forever...
+                var total = Mathf.FloorToInt((Mathf.Pow(CurrentStage, 1.5)) + 4.0);
+                var green = GD.RandRange(0, total);
+                Stages.Add(new Stage()
+                {
+                    TotalGreenGoblins = green,
+                    TotalPinkGoblins = total - green
+                });
+            }
         }
     }
 
@@ -211,4 +246,5 @@ public class Stats
     public int TotalDeadGreenGoblins;
     public int TotalDeadPinkGoblins;
     public double SurvivalTime;
+    public int Wave = 1;
 }

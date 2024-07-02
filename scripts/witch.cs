@@ -71,12 +71,14 @@ public partial class witch : CharacterBody2D
 		// Determine if the witch is moving or idle and set the appropriate animation.
 		if (Velocity != Vector2.Zero)
 		{
+			// Run slower if they are moving slower.
 			_animatedSprite2D.SpeedScale = velocity.Length() / Speed;
 			if (_animatedSprite2D.Animation != "run")
 				_animatedSprite2D.Play("run");
 		}
 		else
 		{
+			// Always idle at full speed.
 			_animatedSprite2D.SpeedScale = 1;
 			if (_animatedSprite2D.Animation != "idle")
 				_animatedSprite2D.Play("idle");

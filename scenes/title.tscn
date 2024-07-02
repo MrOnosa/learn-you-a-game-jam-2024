@@ -61,7 +61,17 @@ focus_neighbor_bottom = NodePath("../StartButton")
 text = "Quit Game
 "
 
+[node name="StartGoblinModeButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 126.0
+offset_top = 165.0
+offset_right = 330.0
+offset_bottom = 221.0
+text = "Start 
+Goblin Mode"
+
 [connection signal="pressed" from="VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="value_changed" from="VBoxContainer/HBoxContainer/VolumeSlider" to="." method="_on_volume_slider_value_changed"]
 [connection signal="pressed" from="VBoxContainer/CreditsButton" to="." method="_on_credits_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/QuitGameButton" to="." method="_on_quit_game_button_pressed"]
+[connection signal="pressed" from="StartGoblinModeButton" to="." method="_on_start_goblin_mode_button_pressed"]

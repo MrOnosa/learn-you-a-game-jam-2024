@@ -14,7 +14,7 @@ public partial class game_over : Node2D
         {
             var statsLabel = GetNode<Label>("CanvasLayer/StatsLabel");
             statsLabel.Text =
-                $"You defeated {global.GameStats.TotalDeadGreenGoblins} Green {(global.GameStats.TotalDeadGreenGoblins == 1 ? "Goblin" : "Goblins")}, {global.GameStats.TotalDeadPinkGoblins} Pink {(global.GameStats.TotalDeadPinkGoblins == 1 ? "Goblin" : "Goblins")}, and survived for {global.GameStats.SurvivalTime:0.00} seconds.";
+                $"Wave {global.GameStats.Wave}: You defeated {global.GameStats.TotalDeadGreenGoblins} Green {(global.GameStats.TotalDeadGreenGoblins == 1 ? "Goblin" : "Goblins")}, {global.GameStats.TotalDeadPinkGoblins} Pink {(global.GameStats.TotalDeadPinkGoblins == 1 ? "Goblin" : "Goblins")}, and survived for {global.GameStats.SurvivalTime:0.00} seconds.";
         }
 
         var audioPlayer = global.GetNode<AudioStreamPlayer>("AudioStreamPlayer");

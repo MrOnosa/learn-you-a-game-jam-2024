@@ -8,6 +8,7 @@ public partial class gm : Node
 	
 	private AudioStreamPlayer _audioStreamPlayer;
 	public Stats GameStats { get; set; }
+	public bool GoblinMode { get; set; }
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()

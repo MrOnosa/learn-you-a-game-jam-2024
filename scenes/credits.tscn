@@ -95,8 +95,19 @@ text = "Artwork:"
 layout_mode = 2
 text = "Artiks"
 
+[node name="HBoxContainer7" type="HBoxContainer" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/VBoxContainer/HBoxContainer7"]
+layout_mode = 2
+text = "Support:"
+
+[node name="Label2" type="Label" parent="CanvasLayer/VBoxContainer/HBoxContainer7"]
+layout_mode = 2
+text = "Kay"
+
 [node name="Control2" type="Control" parent="CanvasLayer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 55)
+custom_minimum_size = Vector2(0, 42)
 layout_mode = 2
 
 [node name="HBoxContainer5" type="HBoxContainer" parent="CanvasLayer/VBoxContainer"]

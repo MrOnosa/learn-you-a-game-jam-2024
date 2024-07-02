@@ -30,6 +30,13 @@ public partial class title : Control
 	
 	private void _on_start_button_pressed()
 	{
+		global.GoblinMode = false;
+		GetTree().ChangeSceneToFile("res://scenes/level.tscn");
+	}
+
+	private void _on_start_goblin_mode_button_pressed()
+	{
+		global.GoblinMode = true;
 		GetTree().ChangeSceneToFile("res://scenes/level.tscn");
 	}
 
