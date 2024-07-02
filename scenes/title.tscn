@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://dcvmpuuwg1eof"]
+[gd_scene load_steps=5 format=3 uid="uid://dcvmpuuwg1eof"]
 
 [ext_resource type="Script" path="res://scripts/title.cs" id="1_oxmii"]
 [ext_resource type="FontFile" uid="uid://dng2s801fsbhl" path="res://assets/fonts/Xolonium-Regular.ttf" id="2_4ns7a"]
+[ext_resource type="Texture2D" uid="uid://dnd8yibeaff6s" path="res://assets/goblinstorm2.png" id="2_n0d2y"]
+[ext_resource type="Texture2D" uid="uid://cs8ipe2q5t2p7" path="res://assets/goblinstorm_logo.png" id="4_jei56"]
 
 [node name="Title" type="Control"]
 layout_mode = 3
@@ -12,66 +14,85 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_oxmii")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="Background" type="TextureRect" parent="."]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -123.0
-offset_top = -68.0
-offset_right = 123.0
-offset_bottom = 68.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+texture = ExtResource("2_n0d2y")
+expand_mode = 3
+metadata/_edit_lock_ = true
 
-[node name="StartButton" type="Button" parent="VBoxContainer"]
-layout_mode = 2
+[node name="StartButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 31.0
+offset_top = 134.0
+offset_right = 272.0
+offset_bottom = 190.0
 focus_neighbor_top = NodePath("../QuitGameButton")
 theme_override_fonts/font = ExtResource("2_4ns7a")
-theme_override_font_sizes/font_size = 64
+theme_override_font_sizes/font_size = 39
 text = "Start Game"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+[node name="VolumeLabel" type="Label" parent="."]
 layout_mode = 2
-alignment = 2
-
-[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer"]
-layout_mode = 2
-text = "Volume
+offset_left = 31.0
+offset_top = 249.0
+offset_right = 94.0
+offset_bottom = 269.0
+size_flags_horizontal = 0
+text = "Volume 
 "
 
-[node name="VolumeSlider" type="HSlider" parent="VBoxContainer/HBoxContainer"]
+[node name="VolumeSlider" type="HSlider" parent="."]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
+offset_left = 112.0
+offset_top = 251.0
+offset_right = 234.0
+offset_bottom = 267.0
 value = 2.0
 
-[node name="Spacer" type="Control" parent="VBoxContainer"]
-custom_minimum_size = Vector2(0, 32)
+[node name="CreditsButton" type="Button" parent="."]
 layout_mode = 2
-
-[node name="CreditsButton" type="Button" parent="VBoxContainer"]
-layout_mode = 2
+offset_left = 150.0
+offset_top = 196.0
+offset_right = 272.0
+offset_bottom = 244.0
 text = "Credits"
 
-[node name="QuitGameButton" type="Button" parent="VBoxContainer"]
+[node name="QuitGameButton" type="Button" parent="."]
 layout_mode = 2
+offset_left = 31.0
+offset_top = 310.0
+offset_right = 145.0
+offset_bottom = 338.0
 focus_neighbor_bottom = NodePath("../StartButton")
 text = "Quit Game
 "
 
 [node name="StartGoblinModeButton" type="Button" parent="."]
 layout_mode = 0
-offset_left = 126.0
-offset_top = 165.0
-offset_right = 330.0
-offset_bottom = 221.0
+offset_left = 31.0
+offset_top = 196.0
+offset_right = 145.0
+offset_bottom = 244.0
 text = "Start 
 Goblin Mode"
 
-[connection signal="pressed" from="VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
-[connection signal="value_changed" from="VBoxContainer/HBoxContainer/VolumeSlider" to="." method="_on_volume_slider_value_changed"]
-[connection signal="pressed" from="VBoxContainer/CreditsButton" to="." method="_on_credits_button_pressed"]
-[connection signal="pressed" from="VBoxContainer/QuitGameButton" to="." method="_on_quit_game_button_pressed"]
+[node name="Logo" type="TextureRect" parent="."]
+layout_mode = 0
+offset_top = 15.0
+offset_right = 320.0
+offset_bottom = 108.0
+texture = ExtResource("4_jei56")
+expand_mode = 3
+metadata/_edit_lock_ = true
+
+[connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="value_changed" from="VolumeSlider" to="." method="_on_volume_slider_value_changed"]
+[connection signal="pressed" from="CreditsButton" to="." method="_on_credits_button_pressed"]
+[connection signal="pressed" from="QuitGameButton" to="." method="_on_quit_game_button_pressed"]
 [connection signal="pressed" from="StartGoblinModeButton" to="." method="_on_start_goblin_mode_button_pressed"]
