@@ -1,9 +1,128 @@
-[gd_scene load_steps=5 format=3 uid="uid://dcvmpuuwg1eof"]
+[gd_scene load_steps=13 format=3 uid="uid://dcvmpuuwg1eof"]
 
 [ext_resource type="Script" path="res://scripts/title.cs" id="1_oxmii"]
 [ext_resource type="FontFile" uid="uid://dng2s801fsbhl" path="res://assets/fonts/Xolonium-Regular.ttf" id="2_4ns7a"]
 [ext_resource type="Texture2D" uid="uid://dnd8yibeaff6s" path="res://assets/goblinstorm2.png" id="2_n0d2y"]
 [ext_resource type="Texture2D" uid="uid://cs8ipe2q5t2p7" path="res://assets/goblinstorm_logo.png" id="4_jei56"]
+
+[sub_resource type="Gradient" id="Gradient_80w2h"]
+offsets = PackedFloat32Array(0.96962)
+colors = PackedColorArray(0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_66qsy"]
+gradient = SubResource("Gradient_80w2h")
+
+[sub_resource type="Animation" id="Animation_c2qqe"]
+resource_name = "new_animation"
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(112, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1)
+}
+
+[sub_resource type="Animation" id="Animation_cp4eh"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7vib1"]
+_data = {
+"RESET": SubResource("Animation_cp4eh"),
+"new_animation": SubResource("Animation_c2qqe")
+}
+
+[sub_resource type="Animation" id="Animation_larbs"]
+resource_name = "first"
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Logo:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Logo:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(-93, -0.25, 0, 0.25, 0, 15, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1)
+}
+
+[sub_resource type="Animation" id="Animation_0rq67"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Logo:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Logo:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(15, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_l8dgm"]
+_data = {
+"RESET": SubResource("Animation_0rq67"),
+"first": SubResource("Animation_larbs")
+}
 
 [node name="Title" type="Control"]
 layout_mode = 3
@@ -14,6 +133,15 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_oxmii")
 
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture1D_66qsy")
+
 [node name="Background" type="TextureRect" parent="."]
 layout_mode = 1
 anchors_preset = 15
@@ -23,7 +151,12 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_n0d2y")
 expand_mode = 3
-metadata/_edit_lock_ = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Background"]
+libraries = {
+"": SubResource("AnimationLibrary_7vib1")
+}
+autoplay = "new_animation"
 
 [node name="StartButton" type="Button" parent="."]
 layout_mode = 0
@@ -83,13 +216,18 @@ text = "Start
 Goblin Mode"
 
 [node name="Logo" type="TextureRect" parent="."]
-layout_mode = 0
 offset_top = 15.0
 offset_right = 320.0
 offset_bottom = 108.0
 texture = ExtResource("4_jei56")
 expand_mode = 3
-metadata/_edit_lock_ = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Logo"]
+root_node = NodePath("../..")
+libraries = {
+"": SubResource("AnimationLibrary_l8dgm")
+}
+autoplay = "first"
 
 [connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="value_changed" from="VolumeSlider" to="." method="_on_volume_slider_value_changed"]
