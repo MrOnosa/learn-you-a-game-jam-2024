@@ -16,6 +16,7 @@ public partial class witch : CharacterBody2D
 
 	[Export] public ItemType InventorySlot1 = ItemType.None;
 
+	private AnimatedSprite2D _animatedSprite2D;
 	private Timer _timer;
 	private Timer _invincibilityTimer;
 	private Camera2D _camera;
@@ -25,6 +26,7 @@ public partial class witch : CharacterBody2D
 
 	public override void _Ready()
 	{
+		_animatedSprite2D = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
 		_timer = GetNode<Timer>("ShootCooldownTimer");
 		_invincibilityTimer = GetNode<Timer>("InvincibilityTimer");
 		_camera = GetNode<Camera2D>("Camera2D");
@@ -39,6 +41,7 @@ public partial class witch : CharacterBody2D
 			Shoot();
 		else if (twin != Vector2.Zero)
 			TwinStickShoot();
+		
 	}
 
 	public override void _PhysicsProcess(double delta)
@@ -64,6 +67,29 @@ public partial class witch : CharacterBody2D
 		}
 
 		Velocity = velocity;
+		
+		// Determine if the witch is moving or idle and set the appropriate animation.
+		if (Velocity != Vector2.Zero)
+		{
+			_animatedSprite2D.SpeedScale = velocity.Length() / Speed;
+			if (_animatedSprite2D.Animation != "run")
+				_animatedSprite2D.Play("run");
+		}
+		else
+		{
+			_animatedSprite2D.SpeedScale = 1;
+			if (_animatedSprite2D.Animation != "idle")
+				_animatedSprite2D.Play("idle");
+		}
+		
+		if (velocity.X < 0)
+		{
+			_animatedSprite2D.Scale = new Vector2(-1, 1);
+		}
+		else
+		{
+			_animatedSprite2D.Scale = new Vector2(1, 1);
+		}
 		MoveAndSlide();
 	}
 

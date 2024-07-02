@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://dinajqbfko0y"]
+[gd_scene load_steps=17 format=3 uid="uid://dinajqbfko0y"]
 
 [ext_resource type="Texture2D" uid="uid://bj03m4yh64d43" path="res://assets/characters/enemyG_placeholder.png" id="1_tf3ux"]
 [ext_resource type="Script" path="res://scripts/green_goblin.cs" id="1_v5pvm"]
 [ext_resource type="PackedScene" uid="uid://pkfb6tq1qoo4" path="res://scenes/health_component.tscn" id="3_q4q4w"]
+[ext_resource type="Texture2D" uid="uid://cilawpngemsxr" path="res://assets/enemy2_anim.png" id="3_u7ku5"]
 
 [sub_resource type="Shader" id="Shader_piqjy"]
 code = "shader_type canvas_item;
@@ -29,6 +30,38 @@ void fragment() {
 shader = SubResource("Shader_piqjy")
 shader_parameter/hurt = false
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_42v30"]
+atlas = ExtResource("3_u7ku5")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q3ai4"]
+atlas = ExtResource("3_u7ku5")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b3bs5"]
+atlas = ExtResource("3_u7ku5")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4230c"]
+atlas = ExtResource("3_u7ku5")
+region = Rect2(0, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f3s54"]
+atlas = ExtResource("3_u7ku5")
+region = Rect2(64, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_smsn4"]
+atlas = ExtResource("3_u7ku5")
+region = Rect2(128, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lokrl"]
+atlas = ExtResource("3_u7ku5")
+region = Rect2(0, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dj7ff"]
+atlas = ExtResource("3_u7ku5")
+region = Rect2(64, 128, 64, 64)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_o0fwx"]
 animations = [{
 "frames": [{
@@ -38,6 +71,35 @@ animations = [{
 "loop": true,
 "name": &"default",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_42v30")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q3ai4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b3bs5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4230c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f3s54")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_smsn4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lokrl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dj7ff")
+}],
+"loop": true,
+"name": &"new_animation",
+"speed": 12.0
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_m1pke"]
@@ -50,6 +112,9 @@ Speed = 0.5
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 material = SubResource("ShaderMaterial_xk6ju")
 sprite_frames = SubResource("SpriteFrames_o0fwx")
+animation = &"new_animation"
+autoplay = "new_animation"
+frame_progress = 0.353371
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 10)
@@ -61,8 +126,11 @@ MaxHealth = 5
 [node name="ShootBulletTimer" type="Timer" parent="."]
 autostart = true
 
-[node name="BulletSpawnMarker2D" type="Marker2D" parent="."]
-position = Vector2(-24, 4)
+[node name="BulletSpawnMarker2DRight" type="Marker2D" parent="."]
+position = Vector2(18, 3)
+
+[node name="BulletSpawnMarker2DLeft" type="Marker2D" parent="."]
+position = Vector2(-18, 3)
 
 [node name="HurtTimer" type="Timer" parent="."]
 

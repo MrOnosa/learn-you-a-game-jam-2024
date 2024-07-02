@@ -120,7 +120,11 @@ public partial class green_goblin : Area2D
     {
         SetShootBulletTimerWaitTimeToARandomRange();
         var scene = GD.Load<PackedScene>("res://scenes/bullet2.tscn");
-        var bulletSpawnPoint = GetNode<Marker2D>("BulletSpawnMarker2D");
+        Marker2D bulletSpawnPoint;
+        if(_animatedSprite2D.Scale.X < 0)
+            bulletSpawnPoint = GetNode<Marker2D>("BulletSpawnMarker2DLeft");
+        else
+            bulletSpawnPoint = GetNode<Marker2D>("BulletSpawnMarker2DRight");
         var inst = scene.Instantiate<magic_bullet>();
         inst.FriendlyFire = false;
         inst.GlobalPosition = bulletSpawnPoint?.GlobalPosition ?? GlobalPosition;
