@@ -9,6 +9,12 @@ public partial class gm : Node
 	private AudioStreamPlayer _audioStreamPlayer;
 	public Stats GameStats { get; set; }
 	public bool GoblinMode { get; set; }
+	
+	// Tutorial Flags
+	public bool EverHeldItem = false;
+	public bool EverHeldCorrectItem = false;
+	public bool EverKilledGoblin = false;
+	public bool EverGotPastWaveOne = false;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()

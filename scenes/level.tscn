@@ -53,6 +53,21 @@ rotation = 0.244979
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
+[node name="Tutorial" type="Label" parent="CanvasLayer"]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -49.0
+offset_top = -130.0
+offset_right = 56.0
+offset_bottom = -110.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Grab a staff!"
+
 [node name="GoblinModeLabel" type="Label" parent="CanvasLayer"]
 visible = false
 anchors_preset = 1
@@ -134,6 +149,7 @@ autostart = true
 
 [connection signal="Died" from="Witch" to="." method="_on_witch_died"]
 [connection signal="HealthChanged" from="Witch" to="." method="_on_witch_health_changed"]
+[connection signal="ItemChanged" from="Witch" to="." method="_on_witch_item_changed"]
 [connection signal="ItemChanged" from="Witch" to="CanvasLayer/Inventory" method="_on_witch_item_changed"]
 [connection signal="pressed" from="CanvasLayer/MenuButton" to="Pause" method="_on_menu_button_pressed"]
 [connection signal="timeout" from="MobSpawnTimer" to="." method="_on_mob_spawn_timer_timeout"]

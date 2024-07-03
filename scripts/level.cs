@@ -19,7 +19,9 @@ public partial class level : Node2D
 
     private Stats _stats;
     private Label _waveCountLabel;
+    private Label _tutorialLabel;
     private CharacterBody2D _witch;
+
     public override void _Ready()
     {
         _stats = new Stats();
@@ -30,8 +32,24 @@ public partial class level : Node2D
         audioPlayer.Play();
         
         _witch = GetNode<CharacterBody2D>("Witch");
-        _waveCountLabel = GetNode<Label>("CanvasLayer/WaveCountLabel");
+        _waveCountLabel = GetNode<Label>("CanvasLayer/WaveCountLabel");;
+        _tutorialLabel = GetNode<Label>("CanvasLayer/Tutorial");
+        
+        // Tutorial logic
+        if (!global.EverGotPastWaveOne)
+        {
+            // This one needs more lessons...
+            global.EverHeldItem = false;
+            global.EverHeldCorrectItem = false;
+            _tutorialLabel.Visible = true;
+        }
 
+        if (global.GoblinMode)
+        {
+            global.EverGotPastWaveOne = false;
+            _tutorialLabel.Visible = true;
+        }
+        
         GetNode<Label>("CanvasLayer/GoblinModeLabel").Visible = global.GoblinMode;
         if (global.GoblinMode)
         {
@@ -83,6 +101,32 @@ public partial class level : Node2D
     public override void _Process(double delta)
     {
         _stats.SurvivalTime += delta;
+        
+        // Tutorial logic
+        if (global.EverGotPastWaveOne)
+        {
+            _tutorialLabel.Visible = false;
+        } else if (global.EverKilledGoblin)
+        {
+            if (global.GoblinMode)
+            {
+                _tutorialLabel.Text = "GOBLIN MODE: The goblins never end!!";
+            }
+            else
+            {
+                _tutorialLabel.Text = "Defeat all goblins";
+            }
+        } else if (global.EverHeldCorrectItem)
+        {
+            _tutorialLabel.Text = "Shoot the goblins";
+        } else if (global.EverHeldItem)
+        {
+            _tutorialLabel.Text = "Wrong staff!";
+        }
+        else
+        {
+            _tutorialLabel.Text = "Grab a staff!";
+        }
     }
 
     public override void _PhysicsProcess(double delta)
@@ -148,6 +192,7 @@ public partial class level : Node2D
 
     private async void _mob_died_handler(ItemType type)
     {
+        global.EverKilledGoblin = true;
         switch (type)
         {
             case ItemType.GreenStaff:
@@ -176,6 +221,7 @@ public partial class level : Node2D
         {
             // The last mob died. New wave!
             CurrentStage++;
+            global.EverGotPastWaveOne = true;
             _stats.Wave = CurrentStage + 1;
             
             if (global.GoblinMode)
@@ -223,6 +269,14 @@ public partial class level : Node2D
     {
         var lifeBar = GetNode<life_bar>("CanvasLayer/LifeBar");
         lifeBar.Paint(healthUpdate.CurrentHealth);
+    }
+    private void _on_witch_item_changed(ItemType itemType)
+    {
+        global.EverHeldItem = true;
+        if (this.GetChildren().OfType<green_goblin>().Any(g => g.WeakToType == itemType))
+        {
+            global.EverHeldCorrectItem = true;
+        }
     }
 
     private void _on_witch_died()
