@@ -1,6 +1,224 @@
-[gd_scene load_steps=2 format=3 uid="uid://dwh66yfpkqum1"]
+[gd_scene load_steps=7 format=3 uid="uid://dwh66yfpkqum1"]
 
 [ext_resource type="Script" path="res://scripts/victory.cs" id="1_1k1us"]
+[ext_resource type="Texture2D" uid="uid://cs8ipe2q5t2p7" path="res://assets/goblinstorm_logo.png" id="2_veh5x"]
+
+[sub_resource type="Animation" id="Animation_bmibt"]
+resource_name = "Bounce_in"
+length = 4.0
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(335, -0.25, 0, 0.25, 0, 333, -0.25, 0, 0.25, 0, 333, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1.4, 2)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(-146, -0.25, 0, 0.25, 0, 86, -0.25, 0, 0.25, 0, 86, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1.4, 2)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(-0.10472, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 2)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:scale:x")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0),
+"points": PackedFloat32Array(0.159, -0.25, 0, 0.25, 0, 0.124438, -0.25, 0, 0.25, 0, 0.124438, -0.25, 0, 0.25, 0, 0.127273, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.9, 1.46, 2)
+}
+tracks/4/type = "bezier"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".:scale:y")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0),
+"points": PackedFloat32Array(0.213, -0.25, 0, 0.25, 0, 0.166497, -0.25, 0, 0.25, 0, 0.166497, -0.25, 0, 0.25, 0, 0.127273, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.9, 1.46, 2)
+}
+tracks/5/type = "bezier"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath(".:skew")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, -0.0523599, -0.25, 0, 0.25, 0, 0.235619, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.9, 1.5, 2)
+}
+
+[sub_resource type="Animation" id="Animation_7arle"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:skew")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0.235619, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0.124438, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:scale:y")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0.166497, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:position:x")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(335, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/4/type = "bezier"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".:position:y")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(-146, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/5/type = "bezier"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath(".:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(-0.10472, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_glerv"]
+resource_name = "loop"
+length = 4.0
+loop_mode = 1
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0.0523599, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.5, 1, 4)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(333, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:position:y")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(86, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:scale:x")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0),
+"points": PackedFloat32Array(0.127273, -0.25, 0, 0.25, 0, 0.137, -0.25, 0, 0.25, 0, 0.127273, -0.25, 0, 0.25, 0, 0.127273, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.5, 1, 4)
+}
+tracks/4/type = "bezier"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".:scale:y")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0),
+"points": PackedFloat32Array(0.127273, -0.25, 0, 0.25, 0, 0.137, -0.25, 0, 0.25, 0, 0.127273, -0.25, 0, 0.25, 0, 0.127273, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.5, 1, 4)
+}
+tracks/5/type = "bezier"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath(".:skew")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_u8gnm"]
+_data = {
+"Bounce_in": SubResource("Animation_bmibt"),
+"RESET": SubResource("Animation_7arle"),
+"loop": SubResource("Animation_glerv")
+}
 
 [node name="Victory" type="Node2D"]
 script = ExtResource("1_1k1us")
@@ -14,9 +232,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -123.0
-offset_top = -24.5
+offset_top = 26.0
 offset_right = 123.0
-offset_bottom = 112.5
+offset_bottom = 186.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -26,7 +244,7 @@ focus_neighbor_top = NodePath("../QuitGameButton")
 text = "Play Again"
 
 [node name="Spacer" type="Control" parent="CanvasLayer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 32)
+custom_minimum_size = Vector2(0, 17)
 layout_mode = 2
 
 [node name="Credits" type="Button" parent="CanvasLayer/VBoxContainer"]
@@ -43,29 +261,32 @@ focus_neighbor_bottom = NodePath("../RestartButton")
 text = "Quit Game
 "
 
-[node name="Label" type="Label" parent="CanvasLayer"]
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -43.5
-offset_top = 42.0
-offset_right = 43.5
-offset_bottom = 65.0
-grow_horizontal = 2
-text = "Victory!!!!!"
-
 [node name="StatsLabel" type="Label" parent="CanvasLayer"]
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -304.0
-offset_top = 63.0
-offset_right = 304.0
-offset_bottom = 86.0
+offset_left = -303.0
+offset_top = 166.0
+offset_right = 305.0
+offset_bottom = 189.0
 grow_horizontal = 2
 text = "You completed the game in 123.43 seconds."
 horizontal_alignment = 1
 autowrap_mode = 3
+
+[node name="GoblinstormLogo" type="Sprite2D" parent="."]
+position = Vector2(335, -146)
+rotation = -0.10472
+scale = Vector2(0.124438, 0.166497)
+skew = 0.235619
+texture = ExtResource("2_veh5x")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="GoblinstormLogo"]
+libraries = {
+"": SubResource("AnimationLibrary_u8gnm")
+}
+autoplay = "Bounce_in"
+next/Bounce_in = &"loop"
 
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/RestartButton" to="." method="_on_restart_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/Credits" to="." method="_on_credits_pressed"]

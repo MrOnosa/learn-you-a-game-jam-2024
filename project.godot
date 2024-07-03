@@ -10,10 +10,11 @@ config_version=5
 
 [application]
 
-config/name="Learn-you-a-game-jam-2024"
+config/name="Goblinstorm: Rise of Rinkollette"
+config/description="Goblinstorm: Rise of Rinkollette"
 run/main_scene="res://scenes/title.tscn"
 config/features=PackedStringArray("4.2", "C#", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="res://assets/icon.png"
 
 [autoload]
 
