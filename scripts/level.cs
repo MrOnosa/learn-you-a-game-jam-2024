@@ -161,18 +161,11 @@ public partial class level : Node2D
         await ToSignal(GetTree().CreateTimer(1), "timeout");
         
         Stage currentStage = null;
-        if (Stages.Count > CurrentStage)
+        if (CurrentStage < Stages.Count)
         {
             currentStage = Stages[CurrentStage];
         }
-        else
-        {
-            //Victory!!!
-            
-            global.GameStats = _stats;
-            GetTree().ChangeSceneToFile("res://scenes/victory.tscn");
-            return;
-        }
+        
         if (currentStage == null 
             /* If the following is true, there are more mobs yet to be spawned. We should wait for all of them */
             || currentStage.TotalPinkGoblins + currentStage.TotalGreenGoblins > 0 ) return;
@@ -184,7 +177,6 @@ public partial class level : Node2D
             // The last mob died. New wave!
             CurrentStage++;
             _stats.Wave = CurrentStage + 1;
-            _waveCountLabel.Text = (CurrentStage + 1).ToString();
             
             if (global.GoblinMode)
             {
@@ -196,7 +188,16 @@ public partial class level : Node2D
                     TotalGreenGoblins = green,
                     TotalPinkGoblins = total - green
                 });
+            } 
+            else if (CurrentStage >= Stages.Count)
+            {
+                //Victory!!!
+            
+                global.GameStats = _stats;
+                GetTree().ChangeSceneToFile("res://scenes/victory.tscn");
+                return;
             }
+            _waveCountLabel.Text = (CurrentStage + 1).ToString();
         }
     }
 

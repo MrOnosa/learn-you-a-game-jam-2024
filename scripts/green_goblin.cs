@@ -133,13 +133,14 @@ public partial class green_goblin : Area2D
         var witch = (CharacterBody2D)level.FindChild("Witch");
         Vector2 mousePos = witch.GlobalPosition;
 
-        Vector2
-            direction = (mousePos - inst.GlobalPosition)
+        Vector2 direction = (mousePos - inst.GlobalPosition)
                 .Normalized(); // Calculate the direction to the mouse from the bullet 
+        
 
         Vector2 velocity = direction * magic_bullet.Speed;
 
         inst.Velocity = velocity;
+        inst.Rotation = velocity.Angle() + Mathf.Pi;
 
         AddSibling(inst);
     }

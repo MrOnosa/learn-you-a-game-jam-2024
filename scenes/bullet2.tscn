@@ -14,8 +14,9 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_kc5hq"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7aouh"]
 radius = 4.0
+height = 16.0
 
 [node name="MagicBullet" type="Area2D"]
 scale = Vector2(0.25, 0.25)
@@ -25,7 +26,8 @@ script = ExtResource("1_f87gs")
 sprite_frames = SubResource("SpriteFrames_c5wrp")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_kc5hq")
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_7aouh")
 
 [node name="LifespanTimer" type="Timer" parent="."]
 autostart = true

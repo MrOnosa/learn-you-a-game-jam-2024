@@ -17,9 +17,9 @@ public partial class title : Control
 			audioPlayer.Play();
 		}
 		
-		GetNode<Button>("VBoxContainer/StartButton").GrabFocus();
+		GetNode<Button>("StartButton").GrabFocus();
 
-		var slider = GetNode<HSlider>("VBoxContainer/HBoxContainer/VolumeSlider");
+		var slider = GetNode<HSlider>("VolumeSlider");
 		slider.Value = global.Volume * 100;
 	}
 

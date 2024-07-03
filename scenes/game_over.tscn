@@ -1,11 +1,38 @@
-[gd_scene load_steps=2 format=3 uid="uid://by73lgy4ga3im"]
+[gd_scene load_steps=7 format=3 uid="uid://by73lgy4ga3im"]
 
 [ext_resource type="Script" path="res://scripts/game_over.cs" id="1_07avt"]
+[ext_resource type="Shader" path="res://scenes/game_over_background.gdshader" id="2_e6vls"]
+[ext_resource type="Texture2D" uid="uid://cacyloj4mpb6m" path="res://assets/DETERMINATION.png" id="3_3l4uk"]
+
+[sub_resource type="Gradient" id="Gradient_o2ocp"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_dsfow"]
+gradient = SubResource("Gradient_o2ocp")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_smsbo"]
+shader = ExtResource("2_e6vls")
+shader_parameter/difference = 0.7
 
 [node name="GameOver" type="Node2D"]
 script = ExtResource("1_07avt")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="TextureRect2" type="TextureRect" parent="CanvasLayer"]
+offset_right = 640.0
+offset_bottom = 360.0
+texture = SubResource("GradientTexture1D_dsfow")
+
+[node name="BackgroundTextureRect" type="TextureRect" parent="CanvasLayer"]
+material = SubResource("ShaderMaterial_smsbo")
+anchors_preset = -1
+offset_left = 94.0
+offset_right = 548.0
+offset_bottom = 360.0
+texture = ExtResource("3_3l4uk")
+expand_mode = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
 anchors_preset = 8
