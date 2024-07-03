@@ -12,6 +12,7 @@ public partial class credits : Node2D
 		audioPlayer.Stop();
 		audioPlayer.Stream = GD.Load<AudioStream>("res://assets/music/RoR_Credits_Song_trimmed_normalized.mp3");
 		audioPlayer.Play();
+		GetNode<Button>("CanvasLayer/Button").GrabFocus();
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.

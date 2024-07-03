@@ -26,6 +26,9 @@ public partial class title : Control
 		var sfxSlider = GetNode<HSlider>("SfxVolumeSlider");
 		sfxSlider.Value = global.SfxVolume * 100;
 		_soundTest = true;
+
+		var fullScreenCheckButton = GetNode<CheckButton>("FullScreenCheckButton");
+		fullScreenCheckButton.ButtonPressed = DisplayServer.WindowGetMode() == DisplayServer.WindowMode.ExclusiveFullscreen;
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -64,6 +67,12 @@ public partial class title : Control
 	private void _on_sfx_volume_slider_value_changed(float value)
 	{
 		global.SetSfxVolume(value / 100.0f, _soundTest);
+	}
+
+	private void _on_full_screen_check_button_toggled(bool value)
+	{
+		DisplayServer.WindowSetMode(value ? DisplayServer.WindowMode.ExclusiveFullscreen : DisplayServer.WindowMode.Maximized);
+		Input.MouseMode = value ? Input.MouseModeEnum.Confined : Input.MouseModeEnum.Visible;
 	}
 	
 }

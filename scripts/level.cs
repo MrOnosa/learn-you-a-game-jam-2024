@@ -127,6 +127,13 @@ public partial class level : Node2D
         {
             _tutorialLabel.Text = "Grab a staff!";
         }
+
+        if (Input.IsActionPressed("C_Pause"))
+        {
+            GetTree().Paused = true;
+            GetNode<CanvasLayer>("Pause/CanvasLayer").Show();
+            GetNode<Button>("Pause/CanvasLayer/Panel/VBoxContainer/ResumeButton").GrabFocus();
+        }
     }
 
     public override void _PhysicsProcess(double delta)

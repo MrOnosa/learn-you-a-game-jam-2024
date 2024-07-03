@@ -28,6 +28,7 @@ public partial class game_over : Node2D
         audioPlayer.Stop();
         audioPlayer.Stream = GD.Load<AudioStream>("res://assets/music/Game_Jam_Rise_of_Rinkollette_Defeat_Music_trimmed_normalized.mp3");
         audioPlayer.Play();
+        GetNode<Button>("CanvasLayer/VBoxContainer/RestartButton").GrabFocus();
     }
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.

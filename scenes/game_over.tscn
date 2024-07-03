@@ -27,7 +27,6 @@ texture = SubResource("GradientTexture1D_dsfow")
 
 [node name="BackgroundTextureRect" type="TextureRect" parent="CanvasLayer"]
 material = SubResource("ShaderMaterial_smsbo")
-anchors_preset = -1
 offset_left = 94.0
 offset_right = 548.0
 offset_bottom = 360.0
