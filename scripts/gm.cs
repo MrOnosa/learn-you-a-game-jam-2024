@@ -5,6 +5,7 @@ public partial class gm : Node
 {
 	[Export] public bool UsingController = false;
 	[Export] public float Volume;
+	[Export] public float SfxVolume;
 	
 	private AudioStreamPlayer _audioStreamPlayer;
 	public Stats GameStats { get; set; }
@@ -27,14 +28,17 @@ public partial class gm : Node
 			// Try creating one instead
 			config = new ConfigFile();
 			config.SetValue("Options", "volume", Volume);
+			config.SetValue("Options", "sfx_volume", SfxVolume);
 			config.Save("user://settings.cfg");
 		}
 		else
 		{
 			Volume = (float)config.GetValue("Options", "volume");
+			SfxVolume = (float)config.GetValue("Options", "sfx_volume");
 		}
 
 		SetVolume(Volume);
+		SetSfxVolume(SfxVolume);
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -54,11 +58,17 @@ public partial class gm : Node
 		}
 	}
 
+	public float ConvertVolumeToDbVolume(float volume)
+	{
+		var dbVolume = Mathf.LinearToDb(volume);
+		if (dbVolume > 3.0) dbVolume = 3.0f;
+		return dbVolume;
+	}
+	
 	public void SetVolume(float volume)
 	{
 		Volume = volume;
-		var dbVolume = Mathf.LinearToDb(Volume);
-		if (dbVolume > 3.0) dbVolume = 3.0f;
+		var dbVolume = ConvertVolumeToDbVolume(Volume);
 		_audioStreamPlayer.VolumeDb = dbVolume;
 		GD.Print("dbVolume " + dbVolume);
 		
@@ -68,7 +78,30 @@ public partial class gm : Node
 		{
 			timer.Start(1);
 		}
-		
+	}
+	public void SetSfxVolume(float volume, bool test = false)
+	{
+		SfxVolume = volume;
+		var dbVolume = ConvertVolumeToDbVolume(SfxVolume);
+		GD.Print("SfxVolume dbVolume " + dbVolume);
+
+		if (test)
+		{
+			// Test the sound
+			var sfxPlayer = GetNode<AudioStreamPlayer>("SfxAudioStreamPlayer");
+			sfxPlayer.VolumeDb = dbVolume;
+			if (!sfxPlayer.Playing)
+			{
+				sfxPlayer.Play();
+			}
+		}
+
+		// Save setting to config after a moment
+		var timer = GetNode<Timer>("SettingsDebouncingTimer");
+		if (timer != null)
+		{
+			timer.Start(1);
+		}
 	}
 
 	private void _on_settings_debouncing_timer_timeout()
@@ -79,6 +112,7 @@ public partial class gm : Node
 		if (err == Error.Ok)
 		{
 			config.SetValue("Options", "volume", Volume);
+			config.SetValue("Options", "sfx_volume", SfxVolume);
 			config.Save("user://settings.cfg");
 		}
 	}

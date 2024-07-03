@@ -4,7 +4,8 @@ using System;
 public partial class title : Control
 {
 	private gm global;
-	
+
+	private bool _soundTest = false;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -21,6 +22,10 @@ public partial class title : Control
 
 		var slider = GetNode<HSlider>("VolumeSlider");
 		slider.Value = global.Volume * 100;
+		
+		var sfxSlider = GetNode<HSlider>("SfxVolumeSlider");
+		sfxSlider.Value = global.SfxVolume * 100;
+		_soundTest = true;
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -54,6 +59,11 @@ public partial class title : Control
 	private void _on_volume_slider_value_changed(float value)
 	{
 		global.SetVolume(value / 100.0f);
+	}
+
+	private void _on_sfx_volume_slider_value_changed(float value)
+	{
+		global.SetSfxVolume(value / 100.0f, _soundTest);
 	}
 	
 }

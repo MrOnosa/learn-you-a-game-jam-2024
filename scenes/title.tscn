@@ -138,6 +138,23 @@ offset_right = 234.0
 offset_bottom = 267.0
 value = 2.0
 
+[node name="VolumeLabel2" type="Label" parent="."]
+offset_left = 31.0
+offset_top = 275.0
+offset_right = 94.0
+offset_bottom = 295.0
+size_flags_horizontal = 0
+text = "Sfx
+"
+
+[node name="SfxVolumeSlider" type="HSlider" parent="."]
+custom_minimum_size = Vector2(100, 0)
+offset_left = 112.0
+offset_top = 279.0
+offset_right = 234.0
+offset_bottom = 295.0
+value = 2.0
+
 [node name="CreditsButton" type="Button" parent="."]
 layout_mode = 2
 offset_left = 150.0
@@ -181,6 +198,7 @@ autoplay = "first"
 
 [connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="value_changed" from="VolumeSlider" to="." method="_on_volume_slider_value_changed"]
+[connection signal="value_changed" from="SfxVolumeSlider" to="." method="_on_sfx_volume_slider_value_changed"]
 [connection signal="pressed" from="CreditsButton" to="." method="_on_credits_button_pressed"]
 [connection signal="pressed" from="QuitGameButton" to="." method="_on_quit_game_button_pressed"]
 [connection signal="pressed" from="StartGoblinModeButton" to="." method="_on_start_goblin_mode_button_pressed"]

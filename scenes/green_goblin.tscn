@@ -1,9 +1,13 @@
-[gd_scene load_steps=17 format=3 uid="uid://dinajqbfko0y"]
+[gd_scene load_steps=21 format=3 uid="uid://dinajqbfko0y"]
 
 [ext_resource type="Texture2D" uid="uid://bj03m4yh64d43" path="res://assets/characters/enemyG_placeholder.png" id="1_tf3ux"]
 [ext_resource type="Script" path="res://scripts/green_goblin.cs" id="1_v5pvm"]
 [ext_resource type="PackedScene" uid="uid://pkfb6tq1qoo4" path="res://scenes/health_component.tscn" id="3_q4q4w"]
 [ext_resource type="Texture2D" uid="uid://cilawpngemsxr" path="res://assets/enemy2_anim.png" id="3_u7ku5"]
+[ext_resource type="AudioStream" uid="uid://buwt218qnhtv0" path="res://assets/sounds/hitHurt.wav" id="5_b5t1l"]
+[ext_resource type="AudioStream" uid="uid://d0575wpkrm3yo" path="res://assets/sounds/notHurt.wav" id="6_xj6cd"]
+[ext_resource type="AudioStream" uid="uid://bahrk1oxcowgx" path="res://assets/sounds/goblinDown.wav" id="7_dquh7"]
+[ext_resource type="AudioStream" uid="uid://cfgkt6p30luk1" path="res://assets/sounds/gunShot.wav" id="8_emvcj"]
 
 [sub_resource type="Shader" id="Shader_piqjy"]
 code = "shader_type canvas_item;
@@ -133,6 +137,18 @@ position = Vector2(18, 3)
 position = Vector2(-18, 3)
 
 [node name="HurtTimer" type="Timer" parent="."]
+
+[node name="HurtAudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_b5t1l")
+
+[node name="NotHurtAudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_xj6cd")
+
+[node name="DoomDoomDeadosAudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_dquh7")
+
+[node name="GunShotAudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_emvcj")
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="Died" from="HealthComponent" to="." method="_on_health_component_died"]

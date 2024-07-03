@@ -3,6 +3,8 @@ using System;
 
 public partial class witch : CharacterBody2D
 {
+    private gm global;
+    
 	[Signal]
 	public delegate void ItemChangedEventHandler(ItemType itemType);
 	[Signal]
@@ -26,6 +28,7 @@ public partial class witch : CharacterBody2D
 
 	public override void _Ready()
 	{
+		global = GetNode<gm>("/root/GM");
 		_animatedSprite2D = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
 		_timer = GetNode<Timer>("ShootCooldownTimer");
 		_invincibilityTimer = GetNode<Timer>("InvincibilityTimer");
@@ -121,6 +124,20 @@ public partial class witch : CharacterBody2D
 		inst.FriendlyFire = true;
 		inst.GlobalPosition = GlobalPosition;
 		inst.Type = InventorySlot1;
+
+		if (InventorySlot1 == ItemType.GreenStaff)
+		{
+			var sfx = GetNode<AudioStreamPlayer2D>("ShootGreenAudioStreamPlayer2D");
+			sfx.VolumeDb = global.ConvertVolumeToDbVolume(global.SfxVolume);
+			sfx.Play();
+		} else if (InventorySlot1 == ItemType.PinkStaff)
+		{
+			var sfx = GetNode<AudioStreamPlayer2D>("ShootPinkAudioStreamPlayer2D");
+			sfx.VolumeDb = global.ConvertVolumeToDbVolume(global.SfxVolume);
+			sfx.Play();
+			
+		}
+
 		return inst;
 	}
 
@@ -149,11 +166,26 @@ public partial class witch : CharacterBody2D
 
 	private void _on_health_component_health_changed(HealthUpdate healthUpdate)
 	{
+		if (healthUpdate.CurrentHealth > 0)
+		{
+			var sfx = GetNode<AudioStreamPlayer2D>("HurtAudioStreamPlayer2D");
+			sfx.VolumeDb = global.ConvertVolumeToDbVolume(global.SfxVolume);
+			sfx.Play();
+		}
+
 		EmitSignal(SignalName.HealthChanged, healthUpdate);
 	}
 
-	private void _on_health_component_died()
+	private async void _on_health_component_died()
 	{
+		var sfx = GetNode<AudioStreamPlayer2D>("DiedAudioStreamPlayer2D");
+		sfx.VolumeDb = global.ConvertVolumeToDbVolume(global.SfxVolume);
+		sfx.Play();
+		Visible = false;
+		
+		// Wait for death sound to play
+		await ToSignal(GetTree().CreateTimer(sfx.Stream.GetLength()), "timeout");
+		
 		EmitSignal(SignalName.Died);
 	}
 
@@ -179,6 +211,10 @@ public partial class witch : CharacterBody2D
 			InventorySlot1 = item.Type;
 			item.QueueFree();
 			EmitSignal(SignalName.ItemChanged, (int)InventorySlot1);
+			
+			var sfx = GetNode<AudioStreamPlayer2D>("PickUpStaffAudioStreamPlayer2D");
+			sfx.VolumeDb = global.ConvertVolumeToDbVolume(global.SfxVolume);
+			sfx.Play();
 		}
 	}
 
@@ -188,6 +224,7 @@ public partial class witch : CharacterBody2D
 		_healthComponent.Damage(damage);
 		Invincible = true;
 		_toggle_invincible_shader(true);
+		
 	}
 
 

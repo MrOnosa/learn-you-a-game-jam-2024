@@ -2,6 +2,7 @@ using Godot;
 
 public partial class green_goblin : Area2D
 {
+    private gm global;
     [Export] public float Speed = 1.0f;
 
     [Export] public float BulletFireWaitTime = 1.0f;
@@ -20,6 +21,7 @@ public partial class green_goblin : Area2D
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
+        global = GetNode<gm>("/root/GM");
         _animatedSprite2D = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
         _healthComponent = GetNode<health_component>("HealthComponent");
         _shootBulletTimer = GetNode<Timer>("ShootBulletTimer");
@@ -96,6 +98,16 @@ public partial class green_goblin : Area2D
                     }
 
                     _hurtTimer.Start(1);
+                    
+                    var sfx = GetNode<AudioStreamPlayer2D>("HurtAudioStreamPlayer2D");
+                    sfx.VolumeDb = global.ConvertVolumeToDbVolume(global.SfxVolume);
+                    sfx.Play();
+                }
+                else
+                {
+                    var sfx = GetNode<AudioStreamPlayer2D>("NotHurtAudioStreamPlayer2D");
+                    sfx.VolumeDb = global.ConvertVolumeToDbVolume(global.SfxVolume);
+                    sfx.Play();
                 }
             }
         }
@@ -108,9 +120,16 @@ public partial class green_goblin : Area2D
         _hurtTimer.Stop();
     }
 
-    private void _on_health_component_died()
+    private async void _on_health_component_died()
     {
-        //TODO: Death animation or something
+        var sfx = GetNode<AudioStreamPlayer2D>("DoomDoomDeadosAudioStreamPlayer2D");
+        sfx.VolumeDb = global.ConvertVolumeToDbVolume(global.SfxVolume);
+        sfx.Play();
+        Visible = false;
+        
+        // Wait for death sound to play
+		await ToSignal(GetTree().CreateTimer(sfx.Stream.GetLength()), "timeout");
+        
         QueueFree();
         
         EmitSignal(SignalName.Dead, (int)WeakToType);
@@ -143,5 +162,9 @@ public partial class green_goblin : Area2D
         inst.Rotation = velocity.Angle() + Mathf.Pi;
 
         AddSibling(inst);
+        
+        var sfx = GetNode<AudioStreamPlayer2D>("GunShotAudioStreamPlayer2D");
+        sfx.VolumeDb = global.ConvertVolumeToDbVolume(global.SfxVolume);
+        sfx.Play();
     }
 }

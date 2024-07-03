@@ -1,10 +1,15 @@
-[gd_scene load_steps=29 format=3 uid="uid://d3vw40ce38beq"]
+[gd_scene load_steps=34 format=3 uid="uid://d3vw40ce38beq"]
 
 [ext_resource type="Script" path="res://scripts/witch.cs" id="1_uilfk"]
 [ext_resource type="Shader" path="res://scenes/witch.gdshader" id="2_j17f8"]
 [ext_resource type="PackedScene" uid="uid://pkfb6tq1qoo4" path="res://scenes/health_component.tscn" id="3_ghxkk"]
 [ext_resource type="Texture2D" uid="uid://c1qkmxt60fc0j" path="res://assets/player_iddle.png" id="4_4tall"]
 [ext_resource type="Texture2D" uid="uid://diblnqvvf1u5n" path="res://assets/player_run_final.png" id="4_360y0"]
+[ext_resource type="AudioStream" uid="uid://dxw1glr6w8trg" path="res://assets/sounds/hitHurter.wav" id="6_7uinn"]
+[ext_resource type="AudioStream" uid="uid://clwac7ocf4okj" path="res://assets/sounds/died.wav" id="6_p5e4k"]
+[ext_resource type="AudioStream" uid="uid://3fnggwwnwwam" path="res://assets/sounds/pickupStaff.wav" id="8_6yuco"]
+[ext_resource type="AudioStream" uid="uid://c3qtjuuhief3m" path="res://assets/sounds/shootGreen.wav" id="9_7bync"]
+[ext_resource type="AudioStream" uid="uid://ivdphqli1n7e" path="res://assets/sounds/shootPink.wav" id="10_ltcs4"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_s5etq"]
 shader = ExtResource("2_j17f8")
@@ -199,6 +204,25 @@ drag_vertical_offset = 1.0
 shape = SubResource("CapsuleShape2D_l7uv5")
 
 [node name="InvincibilityTimer" type="Timer" parent="."]
+
+[node name="DiedAudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_p5e4k")
+
+[node name="HurtAudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_7uinn")
+
+[node name="PickUpStaffAudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_6yuco")
+
+[node name="ShootGreenAudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("9_7bync")
+
+[node name="ShootPinkAudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("10_ltcs4")
+
+[node name="AudioListener2D" type="AudioListener2D" parent="."]
+position = Vector2(0, -12)
+current = true
 
 [connection signal="timeout" from="ShootCooldownTimer" to="." method="_on_shoot_cooldown_timer_timeout"]
 [connection signal="Died" from="HealthComponent" to="." method="_on_health_component_died"]
