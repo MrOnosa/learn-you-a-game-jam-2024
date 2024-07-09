@@ -84,12 +84,23 @@ text = "Pixel Artwork:"
 layout_mode = 2
 text = "Urushianaki"
 
+[node name="HBoxContainer9" type="HBoxContainer" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/VBoxContainer/HBoxContainer9"]
+layout_mode = 2
+text = "Credits Art:"
+
+[node name="Label2" type="Label" parent="CanvasLayer/VBoxContainer/HBoxContainer9"]
+layout_mode = 2
+text = "Urushianaki"
+
 [node name="HBoxContainer4" type="HBoxContainer" parent="CanvasLayer/VBoxContainer"]
 layout_mode = 2
 
 [node name="Label" type="Label" parent="CanvasLayer/VBoxContainer/HBoxContainer4"]
 layout_mode = 2
-text = "Artwork:"
+text = "Title Screen Artwork:"
 
 [node name="Label2" type="Label" parent="CanvasLayer/VBoxContainer/HBoxContainer4"]
 layout_mode = 2
@@ -116,11 +127,11 @@ text = "Sfx:"
 
 [node name="Label2" type="Label" parent="CanvasLayer/VBoxContainer/HBoxContainer8"]
 layout_mode = 2
-text = "Captain_Onosa using
+text = "Captain_Onosa 
 https://sfxr.me/"
 
 [node name="Control2" type="Control" parent="CanvasLayer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 12)
+custom_minimum_size = Vector2(0, 5)
 layout_mode = 2
 
 [node name="HBoxContainer5" type="HBoxContainer" parent="CanvasLayer/VBoxContainer"]
